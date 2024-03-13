@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Container } from "@mui/material";
+import "./App.css";
+import Index from "./Components/Input/Index";
 
-function App() {
+function App(event) {
+  const handle = () =>{
+    if()
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Container>
+        <form>
+          <Index
+            label="First Name"
+            type="text"
+          ></Index>
+          <Index
+            label="Last Name"
+            type="password"
+          ></Index>
+          <Index
+            label="E-mail"
+            type="e-mail"
+          ></Index>
+          <Button variant="contained" sx={{ mx: 1, my: 3 }} onClick={handle}>Text</Button>
+        </form>
+      </Container>
+    </>
   );
 }
 
