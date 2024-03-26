@@ -1,32 +1,21 @@
-import { Button, Container } from "@mui/material";
-import "./App.css";
-import Index from "./Components/Input/Index";
+import React from 'react'
+import Signin from './Pages/Signin/Index'
+import Login from './Pages/Login/Index'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-function App(event) {
-  const handle = () =>{
-    if()
-  }
-  return (
-    <>
-      <Container>
-        <form>
-          <Index
-            label="First Name"
-            type="text"
-          ></Index>
-          <Index
-            label="Last Name"
-            type="password"
-          ></Index>
-          <Index
-            label="E-mail"
-            type="e-mail"
-          ></Index>
-          <Button variant="contained" sx={{ mx: 1, my: 3 }} onClick={handle}>Text</Button>
-        </form>
-      </Container>
-    </>
-  );
+export default function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route
+                    exact path="/"
+                    element={<Login />}
+                />
+                <Route
+                    exact path="/signin"
+                    element={<Signin />}
+                />
+            </Routes>
+        </Router>
+    )
 }
-
-export default App;
