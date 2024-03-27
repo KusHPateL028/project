@@ -15,7 +15,7 @@ export default function Index(props) {
         password: '',
         confirmPassword: ''
     })
-
+    console.log(props)
     const [error, setErr] = useState({})
 
     const [alert, setAlert] = useState(false)
@@ -74,7 +74,7 @@ export default function Index(props) {
                     <Stack width={"50%"} height={props.height}>
                         <Stack component="img" src={signIn} height="100%"  style={{ objectFit: "cover" }} />
                     </Stack>
-                    {props.data}
+                    {props.children}
                 </Stack>
             </Stack>
         </Stack >

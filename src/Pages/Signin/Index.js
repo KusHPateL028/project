@@ -92,170 +92,171 @@ export default function Index() {
     };
 
     const gender = ["Male", "Female", "Other"];
-    const data = (<Stack spacing={3} alignItems={"center"} padding="40px 55px" width="50%">
-
-        <Typography variant="h4" color="#0056FB">Create Account</Typography>
-        <form onSubmit={handleSubmit}>
-            <Stack spacing={3} >
-                <Stack direction="row" alignItems="center" spacing={2} >
-                    <PersonOutlineIcon />
-                    <Input
-                        // required="true"
-                        label="First Name*"
-                        name="firstName"
-                        type="text"
-                        size="small"
-                        value={inputValue.firstName}
-                        onChange={handleChange}
-                        err={Boolean(error.firstName)}
-                        helperText={error.firstName}
-                    ></Input>
-                    <Input
-                        label="Middle Name"
-                        name="middleName"
-                        type="text"
-                        size="small"
-                    />
-                    <Input
-                        // required="true"
-                        label="Last Name*"
-                        name="lastName"
-                        type="text"
-                        size="small"
-                        value={inputValue.lastName}
-                        onChange={handleChange}
-                        err={Boolean(error.lastName)}
-                        helperText={error.lastName}
-                    ></Input>
-                </Stack>
-                <Stack direction={"row"} alignItems={"center"} spacing={2} >
-                    <MailOutline />
-                    <Input
-                        // required="true"
-                        label="E-mail"
-                        name="email"
-                        type="email"
-                        size="small"
-                        value={inputValue.email}
-                        onChange={handleChange}
-                        err={Boolean(error.email)}
-                        helperText={error.email}
-                        sx={{ width: "100%" }}
-                    />
-                </Stack>
-                <Stack direction="row" alignItems={"center"} spacing={2}>
-                    <PhoneInTalk />
-                    <Input component="input"
-                        label="Phone No."
-                        name="phoneNo"
-                        type="text"
-                        size="small"
-                        value={inputValue.phoneNo}
-                        onChange={handleChange}
-                        sx={{ width: "100%" }}
-                    />
-                </Stack>
-                <Stack direction={"row"} alignItems="center" spacing={2}>
-                    <Cake />
-                    <Input
-                        type="date"
-                        size="small"
-                        InputProps={{
-                            max: currentDate
-                        }}
-                        sx={{ width: "100%" }}
-                    />
-                </Stack>
-                <Stack direction={"row"} alignItems={"center"}>
-                    <FontAwesomeIcon icon={faVenusMars} size="lg" />
-                    <RadioButton
-                        array={gender}
-                        direction="row"
-                        row="true"
-                    />
-                </Stack>
-                <Password
-                    label="Password"
-                    size="small"
-                    sx={{ width: "100%" }}
-                    alignItems="center"
-                    value={inputValue.password}
-                    onChange={handleChange}
-                // err={Boolean(error.password)}
-                // helperText={error.passsword}
-                />
-                <Password
-                    label="Confirm Password"
-                    size="small"
-                    sx={{ width: "100%" }}
-                    alignItems="center"
-                    value={inputValue.confirmPassword}
-                    onChange={handleChange}
-                    err={Boolean(error.password)}
-                    helperText={error.passsword}
-                />
-                <Stack alignItems={"center"} style={{ marginTop: "50px" }}>
-                    <Button
-                        width="40%"
-                        variant="contained"
-                        type="submit"
-                        text="Create Account"
-                    />
-                </Stack>
-            </Stack>
-        </form>
-        <Stack direction="column" spacing={3} alignItems={"center"}>
-            <Typography variant="body1">Or Sign Up Using</Typography>
-            <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
-                <Google
-                    onClick={() => login()}
-                    fontSize="large"
-                    cursor="pointer"
-                    border={"1px solid red"}
-                    style={{ color: "#EA4335" }}
-                />
-                <LoginSocialFacebook
-                    appId="2140906686308230"
-                    onResolve={(tokenResponse) => console.log(tokenResponse)}
-                    onReject={(error) => {
-                        console.log(error);
-                    }}
-                >
-                    <FacebookRounded
-                        fontSize="large"
-                        cursor="pointer"
-                        style={{ color: "#4267B2", marginTop: "3px" }}
-                    />
-                </LoginSocialFacebook>
-                <TwitterLogin
-                    authCallbackUrl="http://localhost:3001/"
-                    authCallback={handleTwitterLoginSuccess}
-                    consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-                    consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-                    onSuccess={handleTwitterLoginSuccess}
-                    onFailure={handleTwitterLoginFailure}
-                />
-                {/* <TwitterLogin
-                    authCallback={authHandler}
-                    consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-                    consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-                /> */}
-            </Stack>
-        </Stack>
-        <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "80px" }}>
-            <Typography variant="body1">--------------------Already have an account--------------------</Typography>
-
-            <Link to="/" style={{ width: "50%" }}>
-                <Button
-                    variant="outlined"
-                    text="Log In"
-                    width="100%"
-                />
-            </Link>
-        </Stack>
-    </Stack>)
 
     return (
-        <Layout data={data} height="1000px" width="1100px" />
+        <Layout height="1000px" width="1100px">
+            <Stack spacing={3} alignItems={"center"} padding="40px 55px" width="50%">
+
+                <Typography variant="h4" color="#0056FB">Create Account</Typography>
+                <form onSubmit={handleSubmit}>
+                    <Stack spacing={3} >
+                        <Stack direction="row" alignItems="center" spacing={2} >
+                            <PersonOutlineIcon />
+                            <Input
+                                // required="true"
+                                label="First Name*"
+                                name="firstName"
+                                type="text"
+                                size="small"
+                                value={inputValue.firstName}
+                                onChange={handleChange}
+                                err={Boolean(error.firstName)}
+                                helperText={error.firstName}
+                            ></Input>
+                            <Input
+                                label="Middle Name"
+                                name="middleName"
+                                type="text"
+                                size="small"
+                            />
+                            <Input
+                                // required="true"
+                                label="Last Name*"
+                                name="lastName"
+                                type="text"
+                                size="small"
+                                value={inputValue.lastName}
+                                onChange={handleChange}
+                                err={Boolean(error.lastName)}
+                                helperText={error.lastName}
+                            ></Input>
+                        </Stack>
+                        <Stack direction={"row"} alignItems={"center"} spacing={2} >
+                            <MailOutline />
+                            <Input
+                                // required="true"
+                                label="E-mail"
+                                name="email"
+                                type="email"
+                                size="small"
+                                value={inputValue.email}
+                                onChange={handleChange}
+                                err={Boolean(error.email)}
+                                helperText={error.email}
+                                sx={{ width: "100%" }}
+                            />
+                        </Stack>
+                        <Stack direction="row" alignItems={"center"} spacing={2}>
+                            <PhoneInTalk />
+                            <Input component="input"
+                                label="Phone No."
+                                name="phoneNo"
+                                type="text"
+                                size="small"
+                                value={inputValue.phoneNo}
+                                onChange={handleChange}
+                                sx={{ width: "100%" }}
+                            />
+                        </Stack>
+                        <Stack direction={"row"} alignItems="center" spacing={2}>
+                            <Cake />
+                            <Input
+                                type="date"
+                                size="small"
+                                InputProps={{
+                                    max: currentDate
+                                }}
+                                sx={{ width: "100%" }}
+                            />
+                        </Stack>
+                        <Stack direction={"row"} alignItems={"center"}>
+                            <FontAwesomeIcon icon={faVenusMars} size="lg" />
+                            <RadioButton
+                                array={gender}
+                                direction="row"
+                                row="true"
+                            />
+                        </Stack>
+                        <Password
+                            label="Password"
+                            size="small"
+                            sx={{ width: "100%" }}
+                            alignItems="center"
+                            value={inputValue.password}
+                            onChange={handleChange}
+                        // err={Boolean(error.password)}
+                        // helperText={error.passsword}
+                        />
+                        <Password
+                            label="Confirm Password"
+                            size="small"
+                            sx={{ width: "100%" }}
+                            alignItems="center"
+                            value={inputValue.confirmPassword}
+                            onChange={handleChange}
+                            err={Boolean(error.password)}
+                            helperText={error.passsword}
+                        />
+                        <Stack alignItems={"center"} style={{ marginTop: "50px" }}>
+                            <Button
+                                width="40%"
+                                variant="contained"
+                                type="submit"
+                                text="Create Account"
+                            />
+                        </Stack>
+                    </Stack>
+                </form>
+                <Stack direction="column" spacing={3} alignItems={"center"}>
+                    <Typography variant="body1">Or Sign Up Using</Typography>
+                    <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
+                        <Google
+                            onClick={() => login()}
+                            fontSize="large"
+                            cursor="pointer"
+                            border={"1px solid red"}
+                            style={{ color: "#EA4335" }}
+                        />
+                        <LoginSocialFacebook
+                            appId="2140906686308230"
+                            onResolve={(tokenResponse) => console.log(tokenResponse)}
+                            onReject={(error) => {
+                                console.log(error);
+                            }}
+                        >
+                            <FacebookRounded
+                                fontSize="large"
+                                cursor="pointer"
+                                style={{ color: "#4267B2", marginTop: "3px" }}
+                            />
+                        </LoginSocialFacebook>
+                        <TwitterLogin
+                            authCallbackUrl="http://localhost:3001/"
+                            authCallback={handleTwitterLoginSuccess}
+                            consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
+                            consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
+                            onSuccess={handleTwitterLoginSuccess}
+                            onFailure={handleTwitterLoginFailure}
+                        />
+                        {/* <TwitterLogin
+            authCallback={authHandler}
+            consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
+            consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
+        /> */}
+                    </Stack>
+                </Stack>
+                <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "80px" }}>
+                    <Typography variant="body1">--------------------Already have an account--------------------</Typography>
+
+                    <Link to="/" style={{ width: "50%" }}>
+                        <Button
+                            variant="outlined"
+                            text="Log In"
+                            width="100%"
+                        />
+                    </Link>
+                </Stack>
+            </Stack>
+        </Layout>
     )
 }
