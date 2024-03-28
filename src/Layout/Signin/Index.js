@@ -4,54 +4,6 @@ import signIn from '../../assets/Images/Signin/signin.svg'
 import React, { useState } from 'react'
 
 export default function Index(props) {
-    const [inputValue, setInputValue] = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        email: '',
-        phoneNo: '',
-        gender: '',
-        dob: '',
-        password: '',
-        confirmPassword: ''
-    })
-    console.log(props)
-    const [error, setErr] = useState({})
-
-    const [alert, setAlert] = useState(false)
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setInputValue((prevData) => ({ ...prevData, [name]: value }))
-    }
-
-    const validateData = () => {
-        const err = {}
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!regex.test(inputValue.email)) {
-            err.email = 'Invalid email address'
-        }
-        if (inputValue.firstName === "") {
-            err.firstName = 'Enter Name'
-        }
-        if (inputValue.password === inputValue.confirmPassword) {
-            err.password = "Password does not match"
-        }
-        return err;
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const err = validateData();
-        if (Object.keys(err).length === 0) {
-            setAlert(true)
-            setErr(err)
-        } else {
-            setErr(err);
-        }
-    }
 
     const gender = ['Male', 'Female', 'Other'];
 
