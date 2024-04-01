@@ -1,7 +1,6 @@
-import { Stack, InputAdornment, IconButton } from '@mui/material'
+import { Stack, InputAdornment, IconButton, TextField } from '@mui/material'
 import { React, useState } from 'react'
-import Input from '../../Components/Input/Index'
-import { Key as KeyIcon,VisibilityOff, Visibility } from '@mui/icons-material';
+import { Key as KeyIcon, VisibilityOff, Visibility } from '@mui/icons-material';
 
 export default function Index(props) {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,16 +12,16 @@ export default function Index(props) {
     };
 
     return (
-        <Stack direction="row"  justifyContent={props.justifyContent} alignItems={props.alignItems} spacing={2}>
-            <KeyIcon />
-            <Input
-                label={props.label}
+        <Stack direction="row" justifyContent={props.justifyContent} spacing={2}>
+            <KeyIcon style={{marginTop:"10px"}}/>
+            <TextField
+                label='Password'
                 name={props.name}
                 type={showPassword ? 'text' : 'password'}
                 size={props.size}
-                inputProps={{
+                InputProps={{
                     endAdornment: (
-                        <InputAdornment position="end">
+                        <InputAdornment position="end" >
                             <IconButton
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
@@ -32,14 +31,14 @@ export default function Index(props) {
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
-                    ),
+                    )
                 }}
+                onChange={props.onChange}
+                value={props.value}
+                error={props.err}
+                helperText={props.helperText}
                 sx={props.sx}
-            // value={inputValue.firstName}
-            // onChange={handleChange}
-            // err={Boolean(error.firstName)}
-            // helperText={error.firstName}=
-            ></Input>
-        </Stack>
+            ></TextField >
+        </Stack >
     )
 }

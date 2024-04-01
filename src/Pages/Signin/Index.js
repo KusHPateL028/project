@@ -12,10 +12,14 @@ import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
 import { useGoogleLogin } from '@react-oauth/google';
 import { LoginSocialFacebook, LoginSocialTwitter } from "reactjs-social-login";
 import TwitterLogin from "react-twitter-login";
+import LoginData from '../../Data/LoginData/LoginData'
 
 export default function Index() {
-    const currentDate = new Date().toISOString().split('T')[0];
+    const data = LoginData
 
+    const currentDate = new Date().toISOString().split('T')[0];
+    
+    const [error, setErr] = useState({})
     const [inputValue, setInputValue] = useState({
         firstName: "",
         middleName: "",
@@ -25,17 +29,16 @@ export default function Index() {
         gender: "",
         dob: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword:''
     })
 
-    const [error, setErr] = useState({})
-
-    const [alert, setAlert] = useState(false)
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setInputValue((prevData) => ({ ...prevData, [name]: value }))
     }
+
+    console.log(inputValue)
 
     const validateData = () => {
         const err = {}
@@ -58,12 +61,14 @@ export default function Index() {
 
         const err = validateData();
         if (Object.keys(err).length === 0) {
-            setAlert(true)
-            setErr(err)
+                data.push(inputValue)
+                setErr(err)
         } else {
             setErr(err);
         }
     }
+
+    console.log(data)
 
     const login = useGoogleLogin({
         onSuccess: tokenResponse => {
@@ -90,6 +95,7 @@ export default function Index() {
         console.error(error);
         // Handle failed Twitter login
     };
+
 
     const gender = ["Male", "Female", "Other"];
 
@@ -163,10 +169,13 @@ export default function Index() {
                             <Input
                                 type="date"
                                 size="small"
+                                name="dob"
                                 InputProps={{
                                     max: currentDate
                                 }}
                                 sx={{ width: "100%" }}
+                                value={inputValue.dob}
+                                onChange={handleChange}
                             />
                         </Stack>
                         <Stack direction={"row"} alignItems={"center"}>
@@ -175,27 +184,28 @@ export default function Index() {
                                 array={gender}
                                 direction="row"
                                 row="true"
+                                name="gender"
+                                value={inputValue.gender}
+                                onChange={handleChange}
                             />
                         </Stack>
                         <Password
                             label="Password"
+                            name="password"
                             size="small"
                             sx={{ width: "100%" }}
                             alignItems="center"
                             value={inputValue.password}
                             onChange={handleChange}
-                        // err={Boolean(error.password)}
-                        // helperText={error.passsword}
                         />
                         <Password
                             label="Confirm Password"
+                            name="confirmPassword"
                             size="small"
                             sx={{ width: "100%" }}
                             alignItems="center"
                             value={inputValue.confirmPassword}
                             onChange={handleChange}
-                            err={Boolean(error.password)}
-                            helperText={error.passsword}
                         />
                         <Stack alignItems={"center"} style={{ marginTop: "50px" }}>
                             <Button
