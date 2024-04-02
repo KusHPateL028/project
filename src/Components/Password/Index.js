@@ -33,6 +33,9 @@ export default function Index(props) {
                         </InputAdornment>
                     )
                 }}
+                InputLabelProps={{
+                    shrink: true,
+                  }}
                 onChange={props.onChange}
                 value={props.value}
                 error={props.err}

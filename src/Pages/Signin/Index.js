@@ -1,272 +1,91 @@
-import { Stack, Typography } from "@mui/material"
 import React, { useState } from "react"
-import Input from "../../Components/Input/Index"
-import Button from "../../Components/Button/Index"
-import RadioButton from "../../Components/RadioButton/Index"
-import Password from "../../Components/Password/Index"
 import Layout from "../../Layout/Signin/Index"
-import { Link } from "react-router-dom"
-import { PersonOutline as PersonOutlineIcon, MailOutline, PhoneInTalk, Cake, Google, FacebookRounded, X } from "@mui/icons-material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
-import { useGoogleLogin } from '@react-oauth/google';
-import { LoginSocialFacebook, LoginSocialTwitter } from "reactjs-social-login";
-import TwitterLogin from "react-twitter-login";
-import LoginData from '../../Data/LoginData/LoginData'
+import { useTheme } from '@mui/material/styles'
+import { Tabs, Tab, Box, AppBar, Typography } from '@mui/material';
+import SwipeableViews from 'react-swipeable-views';
+import PatientSignin from './PatientSignin'
+import DoctorSignin from './DoctorSignin'
 
-export default function Index() {
-    const data = LoginData
-
-    const currentDate = new Date().toISOString().split('T')[0];
-    
-    const [error, setErr] = useState({})
-    const [inputValue, setInputValue] = useState({
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        email: "",
-        phoneNo: "",
-        gender: "",
-        dob: "",
-        password: "",
-        confirmPassword:''
-    })
-
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setInputValue((prevData) => ({ ...prevData, [name]: value }))
-    }
-
-    console.log(inputValue)
-
-    const validateData = () => {
-        const err = {}
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!regex.test(inputValue.email)) {
-            err.email = "Invalid email address"
-        }
-        if (inputValue.firstName === "") {
-            err.firstName = "Enter Name"
-        }
-        if (inputValue.password === inputValue.confirmPassword) {
-            err.password = "Password does not match"
-        }
-        return err;
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const err = validateData();
-        if (Object.keys(err).length === 0) {
-                data.push(inputValue)
-                setErr(err)
-        } else {
-            setErr(err);
-        }
-    }
-
-    console.log(data)
-
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => {
-            const accessToken = tokenResponse.access_token;
-
-            fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            })
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error fetching user info:', error));
-
-        }
-    });
-
-    const handleTwitterLoginSuccess = (response) => {
-        console.log(response);
-        // Handle successful Twitter login
-    };
-
-    const handleTwitterLoginFailure = (error) => {
-        console.error(error);
-        // Handle failed Twitter login
-    };
-
-
-    const gender = ["Male", "Female", "Other"];
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
     return (
-        <Layout height="1000px" width="1100px">
-            <Stack spacing={3} alignItems={"center"} padding="40px 55px" width="50%">
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`action-tabpanel-${index}`}
+            aria-labelledby={`action-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        </Typography>
+    );
+}
 
-                <Typography variant="h4" color="#0056FB">Create Account</Typography>
-                <form onSubmit={handleSubmit}>
-                    <Stack spacing={3} >
-                        <Stack direction="row" alignItems="center" spacing={2} >
-                            <PersonOutlineIcon />
-                            <Input
-                                // required="true"
-                                label="First Name*"
-                                name="firstName"
-                                type="text"
-                                size="small"
-                                value={inputValue.firstName}
-                                onChange={handleChange}
-                                err={Boolean(error.firstName)}
-                                helperText={error.firstName}
-                            ></Input>
-                            <Input
-                                label="Middle Name"
-                                name="middleName"
-                                type="text"
-                                size="small"
-                            />
-                            <Input
-                                // required="true"
-                                label="Last Name*"
-                                name="lastName"
-                                type="text"
-                                size="small"
-                                value={inputValue.lastName}
-                                onChange={handleChange}
-                                err={Boolean(error.lastName)}
-                                helperText={error.lastName}
-                            ></Input>
-                        </Stack>
-                        <Stack direction={"row"} alignItems={"center"} spacing={2} >
-                            <MailOutline />
-                            <Input
-                                // required="true"
-                                label="E-mail"
-                                name="email"
-                                type="email"
-                                size="small"
-                                value={inputValue.email}
-                                onChange={handleChange}
-                                err={Boolean(error.email)}
-                                helperText={error.email}
-                                sx={{ width: "100%" }}
-                            />
-                        </Stack>
-                        <Stack direction="row" alignItems={"center"} spacing={2}>
-                            <PhoneInTalk />
-                            <Input component="input"
-                                label="Phone No."
-                                name="phoneNo"
-                                type="text"
-                                size="small"
-                                value={inputValue.phoneNo}
-                                onChange={handleChange}
-                                sx={{ width: "100%" }}
-                            />
-                        </Stack>
-                        <Stack direction={"row"} alignItems="center" spacing={2}>
-                            <Cake />
-                            <Input
-                                type="date"
-                                size="small"
-                                name="dob"
-                                InputProps={{
-                                    max: currentDate
-                                }}
-                                sx={{ width: "100%" }}
-                                value={inputValue.dob}
-                                onChange={handleChange}
-                            />
-                        </Stack>
-                        <Stack direction={"row"} alignItems={"center"}>
-                            <FontAwesomeIcon icon={faVenusMars} size="lg" />
-                            <RadioButton
-                                array={gender}
-                                direction="row"
-                                row="true"
-                                name="gender"
-                                value={inputValue.gender}
-                                onChange={handleChange}
-                            />
-                        </Stack>
-                        <Password
-                            label="Password"
-                            name="password"
-                            size="small"
-                            sx={{ width: "100%" }}
-                            alignItems="center"
-                            value={inputValue.password}
-                            onChange={handleChange}
-                        />
-                        <Password
-                            label="Confirm Password"
-                            name="confirmPassword"
-                            size="small"
-                            sx={{ width: "100%" }}
-                            alignItems="center"
-                            value={inputValue.confirmPassword}
-                            onChange={handleChange}
-                        />
-                        <Stack alignItems={"center"} style={{ marginTop: "50px" }}>
-                            <Button
-                                width="40%"
-                                variant="contained"
-                                type="submit"
-                                text="Create Account"
-                            />
-                        </Stack>
-                    </Stack>
-                </form>
-                <Stack direction="column" spacing={3} alignItems={"center"}>
-                    <Typography variant="body1">Or Sign Up Using</Typography>
-                    <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
-                        <Google
-                            onClick={() => login()}
-                            fontSize="large"
-                            cursor="pointer"
-                            border={"1px solid red"}
-                            style={{ color: "#EA4335" }}
-                        />
-                        <LoginSocialFacebook
-                            appId="2140906686308230"
-                            onResolve={(tokenResponse) => console.log(tokenResponse)}
-                            onReject={(error) => {
-                                console.log(error);
-                            }}
-                        >
-                            <FacebookRounded
-                                fontSize="large"
-                                cursor="pointer"
-                                style={{ color: "#4267B2", marginTop: "3px" }}
-                            />
-                        </LoginSocialFacebook>
-                        <TwitterLogin
-                            authCallbackUrl="http://localhost:3001/"
-                            authCallback={handleTwitterLoginSuccess}
-                            consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-                            consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-                            onSuccess={handleTwitterLoginSuccess}
-                            onFailure={handleTwitterLoginFailure}
-                        />
-                        {/* <TwitterLogin
-            authCallback={authHandler}
-            consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-            consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-        /> */}
-                    </Stack>
-                </Stack>
-                <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "80px" }}>
-                    <Typography variant="body1">--------------------Already have an account--------------------</Typography>
+function a11yProps(index) {
+    return {
+        id: `action-tab-${index}`,
+        'aria-controls': `action-tabpanel-${index}`,
+    };
+}
 
-                    <Link to="/" style={{ width: "50%" }}>
-                        <Button
-                            variant="outlined"
-                            text="Log In"
-                            width="100%"
-                        />
-                    </Link>
-                </Stack>
-            </Stack>
+export default function Index() {
+    const theme = useTheme();
+    const [value, setValue] = useState(0);
+
+    const handleChange1 = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+    };
+
+    const transitionDuration = {
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen,
+    };
+
+    return (
+        <Layout height="970px" width="1100px">
+            <Box
+                sx={{
+                    bgcolor: 'background.paper',
+                    width: "50%",
+                    position: 'relative',
+                }}
+            >
+                <AppBar position="static" color="default">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange1}
+                        indicatorColor="none"
+                        textColor="primary"
+                        variant="fullWidth"
+                        aria-label="action tabs example"
+                        
+                    >
+                        <Tab label="Patient " {...a11yProps(0)} sx={{borderTopRightRadius:"8px",borderBottomRightRadius:"8px", background:value===0?"linear-gradient(45deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)":""}}/>
+                        <Tab label="Doctor" {...a11yProps(1)} sx={{borderTopLeftRadius:"8px",borderBottomLeftRadius:"8px", background:value===1?"linear-gradient(315deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)":""}}/>
+                    </Tabs>
+                </AppBar>
+                <SwipeableViews
+                    axis={theme.direction === 'ltr' ? 'x' : 'x-reverse'}
+                    index={value}
+                    onChangeIndex={handleChangeIndex}
+                >
+                    <TabPanel value={value} index={0} dir={theme.direction}>
+                        <PatientSignin />
+                    </TabPanel>
+                    <TabPanel value={value} index={1} dir={theme.direction}>
+                        <DoctorSignin/>
+                    </TabPanel>
+
+                </SwipeableViews>
+
+            </Box>
+
         </Layout>
     )
 }

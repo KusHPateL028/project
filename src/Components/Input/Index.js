@@ -20,6 +20,9 @@ export default function Index(props) {
             error={props.err}
             helperText={props.helperText}
             InputProps={props.inputProps}
+            InputLabelProps={{
+                shrink: true,
+              }}
             sx={props.sx}
         />
     );

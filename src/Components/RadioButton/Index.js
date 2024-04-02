@@ -4,7 +4,7 @@ import { Stack, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } fr
 
 export default function Index(props) {
     let newArr = props.array.map((item) => {
-        return (<FormControlLabel value={item.toLowerCase()} control={<Radio />} label={item} />)
+        return (<FormControlLabel name={props.name} key={item} value={item.toLowerCase()} control={<Radio />} label={item} />)
     })
 
     let properties = {};
@@ -23,6 +23,7 @@ export default function Index(props) {
             <RadioGroup
                 row={props.row}
                 column={props.column}
+                onChange={props.onChange}
             >
                 {newArr}
 
