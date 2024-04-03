@@ -3,15 +3,11 @@ import React, { useState } from "react"
 import Input from "../../Components/Input/Index"
 import Button from "../../Components/Button/Index"
 import RadioButton from "../../Components/RadioButton/Index"
-import Password from "../../Components/Password/Index"
-import { Link } from "react-router-dom"
-import { PersonOutline as PersonOutlineIcon, MailOutline, PhoneInTalk, Cake, Google, FacebookRounded, X ,GroupAdd , School} from "@mui/icons-material";
+import { PersonOutline as PersonOutlineIcon, MailOutline, PhoneInTalk, Cake , GroupAdd, School } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding,  faVenusMars } from "@fortawesome/free-solid-svg-icons";
-import { useGoogleLogin } from '@react-oauth/google';
-import { LoginSocialFacebook, LoginSocialTwitter } from "reactjs-social-login";
-import TwitterLogin from "react-twitter-login";
+import { faBuilding, faVenusMars } from "@fortawesome/free-solid-svg-icons";
 import LoginData from '../../Data/LoginData/LoginData';
+import SocialMedia from '../../Layout/SocialMedia/Index'
 
 
 export default function Index() {
@@ -27,12 +23,12 @@ export default function Index() {
         phoneNo: "",
         gender: "",
         dob: "",
-        specialization:"",
-        experience:"",
-        degree:"",  
+        specialization: "",
+        experience: "",
+        degree: "",
         password: "",
         confirmPassword: '',
-        age:"",
+        age: "",
     })
 
     const calculateAge = (dob) => {
@@ -59,27 +55,18 @@ export default function Index() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
-        if (!emailRegex.test(inputValue.email) || inputValue.email === "") {
+        if (Object.entries(inputValue).some(([key, value]) => value.trim() === '')) {
+            Object.keys(inputValue).forEach(key => {
+                err[key] = `Enter ${key[0].toUpperCase()+key.slice(1)}`;
+            });
+        }
+
+        if (!emailRegex.test(inputValue.email) ) {
             err.email = "Enter valid E-mail address"
         }
-        if(inputValue.lastName===""){
-            err.lastName="Enter Last Name"
-        }
-        if (inputValue.firstName === "") {
-            err.firstName = "Enter Name"
-        }
-        if (inputValue.experience === "") {
-            err.experience = "Enter Experience"
-        }
-        if (inputValue.specialization === "") {
-            err.specialization = "Enter Specialization"
-        }
-        if (inputValue.degree === "") {
-            err.degree = "Select Degree"
-        }
-        if(inputValue.phoneNo === "" || !phoneRegex.test(inputValue.phoneNo)){
+        if (!phoneRegex.test(inputValue.phoneNo)) {
             err.phoneNo = "Enter Valid Phone number"
-        }
+        }   
         if (inputValue.password !== inputValue.confirmPassword) {
             err.password = "Password does not match"
         }
@@ -101,30 +88,7 @@ export default function Index() {
     console.log(data)
 
 
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => {
-            const accessToken = tokenResponse.access_token;
-
-            fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            })
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error fetching user info:', error));
-        }
-    });
-
-    const handleTwitterLoginSuccess = (response) => {
-        console.log(response);
-        // Handle successful Twitter login
-    };
-
-    const handleTwitterLoginFailure = (error) => {
-        console.error(error);
-        // Handle failed Twitter login
-    };
+   
 
 
     const gender = ["Male", "Female", "Other"];
@@ -146,7 +110,7 @@ export default function Index() {
                         onChange={handleChange}
                         err={Boolean(error.firstName)}
                         helperText={error.firstName}
-                        sx={{width:"36%"}}
+                        sx={{ width: "36%" }}
                     ></Input>
                     <Input
                         label="Middle Name"
@@ -155,7 +119,7 @@ export default function Index() {
                         size="small"
                         value={inputValue.middleName}
                         onChange={handleChange}
-                        sx={{width:"28%"}}
+                        sx={{ width: "28%" }}
                     />
                     <Input
                         label="Last Name"
@@ -166,7 +130,7 @@ export default function Index() {
                         onChange={handleChange}
                         err={Boolean(error.lastName)}
                         helperText={error.lastName}
-                        sx={{width:"36%"}}
+                        sx={{ width: "36%" }}
                     ></Input>
                 </Stack>
                 <Stack direction={"row"} spacing={2} height={"50px"}>
@@ -201,6 +165,7 @@ export default function Index() {
                 <Stack direction={"row"} spacing={2} height={"50px"}>
                     <Cake style={{ marginTop: "7px" }} />
                     <Input
+                        label="Date of Birth"
                         type="date"
                         size="small"
                         name="dob"
@@ -229,7 +194,7 @@ export default function Index() {
                 </Stack>
                 <Stack direction="row" spacing={3} width={"100%"} >
                     <Stack direction="row" spacing={2} height={"50px"} width={"40%"} >
-                        <GroupAdd style={{ marginTop: "8px" }}/>
+                        <GroupAdd style={{ marginTop: "8px" }} />
                         <Input component="input"
                             label="Experience"
                             name="experience"
@@ -258,7 +223,7 @@ export default function Index() {
                     </Stack>
                 </Stack>
                 <Stack direction="row" spacing={2} height={"50px"} >
-                    <School size="lg" style={{ marginTop: "8px" }}/>
+                    <School size="lg" style={{ marginTop: "8px" }} />
                     <Input component="input"
                         label="Degree"
                         name="degree"
@@ -271,27 +236,7 @@ export default function Index() {
                         sx={{ width: "100%" }}
                     />
                 </Stack>
-                {/* <Password
-                        label="Password"
-                        name="password"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        alignItems="center"
-                        value={inputValue.password}
-                        onChange={handleChange}
-                        err={Boolean(error.password)}
-                        helperText={error.password}
-                    />
-                    <Password
-                        label="Confirm Password"
-                        name="confirmPassword"
-                        size="small"
-                        sx={{ width: "100%" }}
-                        alignItems="center"
-                        value={inputValue.confirmPassword}
-                        onChange={handleChange}
-                    /> */}
-                <Stack alignItems={"center"} style={{ marginTop: "50px" }}>
+                <Stack alignItems={"center"} style={{ marginTop: "25px" }}>
                     <Button
                         width="50%"
                         variant="contained"
@@ -300,56 +245,7 @@ export default function Index() {
                     />
                 </Stack>
             </Stack>
-            <Stack direction="column" spacing={3} alignItems={"center"}>
-                <Typography variant="body1">Or Sign Up Using</Typography>
-                <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
-                    <Google
-                        onClick={() => login()}
-                        fontSize="large"
-                        cursor="pointer"
-                        border={"1px solid red"}
-                        style={{ color: "#EA4335" }}
-                    />
-                    <LoginSocialFacebook
-                        appId="2140906686308230"
-                        onResolve={(tokenResponse) => console.log(tokenResponse)}
-                        onReject={(error) => {
-                            console.log(error);
-                        }}
-                    >
-                        <FacebookRounded
-                            fontSize="large"
-                            cursor="pointer"
-                            style={{ color: "#4267B2", marginTop: "3px" }}
-                        />
-                    </LoginSocialFacebook>
-                    <X/>
-                    {/* <TwitterLogin
-                        authCallbackUrl="http://localhost:3001/"
-                        authCallback={handleTwitterLoginSuccess}
-                        consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-                        consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-                        onSuccess={handleTwitterLoginSuccess}
-                        onFailure={handleTwitterLoginFailure}
-                    /> */}
-                    {/* <TwitterLogin
-                        authCallback={authHandler}
-                        consumerKey="qcCfighvdUhAwaiFPWq7Yq64r"
-                        consumerSecret="bwff8d2rooUegKqSP8MHqDnMUhUuXiQUosZNXgSTFQHQ8HG02D"
-                        /> */}
-                </Stack>
-            </Stack>
-            <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "25px" }}>
-                <Typography variant="body1">---------------Already have an account---------------</Typography>
-
-                <Link to="/" style={{ width: "50%" }}>
-                    <Button
-                        variant="outlined"
-                        text="Log In"
-                        width="100%"
-                    />
-                </Link>
-            </Stack>
+            <SocialMedia sx={{marginTop:"25px"}}/>
         </Stack>
 
     )

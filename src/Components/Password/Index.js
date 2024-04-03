@@ -15,7 +15,7 @@ export default function Index(props) {
         <Stack direction="row" justifyContent={props.justifyContent} spacing={2}>
             <KeyIcon style={{marginTop:"10px"}}/>
             <TextField
-                label='Password'
+                label={props.label}
                 name={props.name}
                 type={showPassword ? 'text' : 'password'}
                 size={props.size}

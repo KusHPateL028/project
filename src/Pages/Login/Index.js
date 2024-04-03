@@ -18,10 +18,7 @@ export default function Index() {
         password: ''
     });
 
-    const [err, setErr] = useState({
-        password: '',
-        userName: ''
-    })
+    const [err, setErr] = useState({})
 
     const changeHandler = (event) => {
         event.preventDefault()
