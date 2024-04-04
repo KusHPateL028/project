@@ -1,283 +1,185 @@
-import React , {useState} from "react";
-import PropTypes from "prop-types";
-import { Stack , AppBar , Box , Toolbar , IconButton , Typography , Container , Avatar , Button , Tooltip , Divider , Drawer , List , ListItem , ListItemButton , ListItemIcon , ListItemText } from "@mui/material";
-import { Home as HomeIcon , Menu as MenuIcon , MedicalServices as MedicalServicesIcon , Info as InfoIcon} from '@mui/icons-material';
+import React from "react";
+import { Stack, AppBar, Box, Toolbar, Typography, Container, Avatar, Button, Link } from "@mui/material";
+import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserDoctor , faFlaskVial } from "@fortawesome/free-solid-svg-icons";
+import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logos/logo.png";
+import Drawer from '../Drawer/Index'
 
-const drawerWidth = 240;
-const pages = ["Products", "Pricing", "Blog"];
+const profile = [
+	{
+		name: "Profile",
+		icon: <PersonOutlineIcon />
+	},
+	{
+		name: "Dashboard",
+		icon: <GridView />
+	},
+	{
+		name: "Logout",
+		icon: <Logout />
+	},
+]
 const menu = [
-    {
-        name:"Home",
-        icon:<HomeIcon />
-    },
-    {
-        name:"Services",
-        icon:<MedicalServicesIcon  size="lg"/>
-    },
-    {
-        name:"Doctors",
-        icon:<FontAwesomeIcon icon={faUserDoctor} size="lg" style={{marginLeft:3}}/>
-    },
-    {
-        name:"Lab Test",
-        icon:<FontAwesomeIcon icon={faFlaskVial} size="lg" style={{marginLeft:3}}/>
-    },
-    {
-        name:"About Us",
-        icon:<InfoIcon/>
-    },
+	{
+		name: "Home",
+		icon: <HomeIcon />,
+		url: '/home'
+	},
+	{
+		name: "Services",
+		icon: <MedicalServicesIcon size="lg" />,
+		url: '/services'
+	},
+	{
+		name: "Doctors",
+		icon: <FontAwesomeIcon icon={faUserDoctor} size="lg" style={{ marginLeft: 3 }} />,
+		url: '/doctors'
+	},
+	{
+		name: "Lab Test",
+		icon: <FontAwesomeIcon icon={faFlaskVial} size="lg" style={{ marginLeft: 3 }} />,
+		url: '/labtest'
+	},
+	{
+		name: "About Us",
+		icon: <InfoIcon />,
+		url: '/about'
+	},
 ]
 
-function Index(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
-
-  const menuDrawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {menu.map(({name,icon}) => (
-          <ListItem key={name} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {icon}
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
-  const profileDrawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {menu.map(({name,icon}) => (
-          <ListItem key={name} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {icon}
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Stack
-            component={"img"}
-            src={logo}
-            width="40px"
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            HEALTH
-          </Typography>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            CARE
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleDrawerToggle}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Box
-              component="nav"
-              sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-              aria-label="mailbox folders"
-            >
-              <Drawer
-                container={container}
-                variant="temporary"
-                open={mobileOpen}
-                onTransitionEnd={handleDrawerTransitionEnd}
-                onClose={handleDrawerClose}
-                ModalProps={{
-                  keepMounted: true,
-                }}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                  "& .MuiDrawer-paper": {
-                    boxSizing: "border-box",
-                    width: drawerWidth,
-                  },
-                }}
-              >
-                {menuDrawer}
-              </Drawer>
-            </Box>
-          </Box>
-          <Stack
-            component={"img"}
-            src={logo}
-            width="40px"
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-          />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              display: { xs: "flex", md: "none" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            HEALTH
-          </Typography>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            CARE
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleDrawerToggle}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleDrawerToggle} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Box
-              component="nav"
-              sx={{ flexShrink: { mt: 0 } }}
-              aria-label="mailbox folders"
-            >
-              <Drawer
-                container={container}
-                variant="temporary"
-                open={mobileOpen}
-                onTransitionEnd={handleDrawerTransitionEnd}
-                onClose={handleDrawerClose}
-                ModalProps={{
-                  keepMounted: true, 
-                }}
-                sx={{
-                  display: { xs: "block", md: "block" },
-                  "& .MuiDrawer-paper": {
-                    boxSizing: "border-box",
-                    width: drawerWidth,
-                  },
-                }}
-              >
-                {profileDrawer}
-              </Drawer>
-            </Box>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
+export default function Index(props) {
+	return (
+		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
+			<Container maxWidth="xl">
+				<Toolbar disableGutters>
+					<Stack
+						component={"img"}
+						src={logo}
+						width="40px"
+						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+					/>
+					<Typography
+						variant="h6"
+						noWrap
+						component="a"
+						href="#app-bar-with-responsive-menu"
+						sx={{
+							display: { xs: "none", md: "flex" },
+							fontFamily: "monospace",
+							fontWeight: 700,
+							color: "#409bd8",
+							textDecoration: "none",
+						}}
+					>
+						HEALTH
+					</Typography>
+					<Typography
+						variant="h6"
+						noWrap
+						component="a"
+						href="#app-bar-with-responsive-menu"
+						sx={{
+							mr: 2,
+							display: { xs: "none", md: "flex" },
+							fontFamily: "monospace",
+							fontWeight: 700,
+							color: "#65138f",
+							textDecoration: "none",
+						}}
+					>
+						CARE
+					</Typography>
+					<Drawer
+						array={menu}
+						BoxSX={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+						button="MenuButton"
+						anchor="left"
+						display={` xs: "block", md: "none" `}
+					>
+						<MenuIcon style={{ color: "black" }} />
+					</Drawer>
+					<Stack
+						component={"img"}
+						src={logo}
+						width="40px"
+						sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+					/>
+					<Typography
+						variant="h5"
+						noWrap
+						component="a"
+						href="#app-bar-with-responsive-menu"
+						sx={{
+							display: { xs: "flex", md: "none" },
+							fontFamily: "monospace",
+							fontWeight: 700,
+							color: "#409bd8",
+							textDecoration: "none",
+						}}
+					>
+						HEALTH
+					</Typography>
+					<Typography
+						variant="h5"
+						noWrap
+						component="a"
+						href="#app-bar-with-responsive-menu"
+						sx={{
+							mr: 2,
+							display: { xs: "flex", md: "none" },
+							flexGrow: 1,
+							fontFamily: "monospace",
+							fontWeight: 700,
+							color: "#65138f",
+							textDecoration: "none",
+						}}
+					>
+						CARE
+					</Typography>
+					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} justifyContent={"center"} mr={10}>
+						{menu.map(({ name, url }) => (
+							<Link
+								to={url}
+								sx={{
+									textDecoration: "none",
+									
+								}}
+							>
+								<Typography
+									key={name}
+									variant="body1"
+									mx={1}
+									color="black"
+									sx={{
+										cursor: "pointer",
+										'&:hover': {
+											color: 'red',
+										  },
+									}}
+								>
+									{name}
+								</Typography>
+							</Link>
+							// <Button
+							// 	key={name}
+							// 	sx={{ my: 2, color: "black", display: "block" }}
+							// >
+							// 	{name}
+							// </Button>
+						))}
+					</Box>
+					<Drawer
+						array={profile}
+						BoxSX={{ flexGrow: 0 }}
+						button="ProfileButton"
+						anchor="right"
+						display="block"
+					>
+						<Avatar>{"Kush".slice(0, 1)}</Avatar>
+					</Drawer>
+				</Toolbar>
+			</Container>
+		</AppBar>
+	);
 }
-
-Index.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window: PropTypes.func,
-};
-export default Index;

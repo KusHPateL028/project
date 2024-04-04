@@ -6,7 +6,7 @@ export default function Index(props) {
 	const [hovered, setHovered] = useState(false);
 	return (
 		<Button
-		variant={hovered ? (variant === 'contained'? 'outlined':'contained'):variant}
+			variant={hovered ? (variant === 'contained'? 'outlined':'contained'):variant}
 			type={props.type}
 			onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
