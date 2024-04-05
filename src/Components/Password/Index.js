@@ -2,6 +2,7 @@ import { Stack, InputAdornment, IconButton, TextField } from '@mui/material'
 import { React, useState } from 'react'
 import { Key as KeyIcon, VisibilityOff, Visibility } from '@mui/icons-material';
 
+
 export default function Index(props) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -13,8 +14,9 @@ export default function Index(props) {
 
     return (
         <Stack direction="row" justifyContent={props.justifyContent} spacing={2}>
-            <KeyIcon style={{marginTop:"10px"}}/>
+            <KeyIcon style={{ marginTop: "10px" }} />
             <TextField
+                required={props.required}
                 label={props.label}
                 name={props.name}
                 type={showPassword ? 'text' : 'password'}
@@ -35,11 +37,12 @@ export default function Index(props) {
                 }}
                 InputLabelProps={{
                     shrink: true,
-                  }}
+                }}
                 onChange={props.onChange}
                 value={props.value}
                 error={props.err}
                 helperText={props.helperText}
+                pattern={props.pattern}
                 sx={props.sx}
             ></TextField >
         </Stack >

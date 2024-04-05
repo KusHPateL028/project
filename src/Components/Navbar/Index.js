@@ -1,101 +1,141 @@
-import React from "react";
-import { Stack, AppBar, Box, Toolbar, Typography, Container, Avatar, Button, Link } from "@mui/material";
+import React, { useState } from "react";
+import { Stack, AppBar, Box, Toolbar, Typography, Container, Avatar, Link } from "@mui/material";
 import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logos/logo.png";
 import Drawer from '../Drawer/Index'
+import { useAuth } from '../../Context/AuthContext'
 
-const profile = [
-	{
-		name: "Profile",
-		icon: <PersonOutlineIcon />
-	},
-	{
-		name: "Dashboard",
-		icon: <GridView />
-	},
-	{
-		name: "Logout",
-		icon: <Logout />
-	},
-]
-const menu = [
-	{
-		name: "Home",
-		icon: <HomeIcon />,
-		url: '/home'
-	},
-	{
-		name: "Services",
-		icon: <MedicalServicesIcon size="lg" />,
-		url: '/services'
-	},
-	{
-		name: "Doctors",
-		icon: <FontAwesomeIcon icon={faUserDoctor} size="lg" style={{ marginLeft: 3 }} />,
-		url: '/doctors'
-	},
-	{
-		name: "Lab Test",
-		icon: <FontAwesomeIcon icon={faFlaskVial} size="lg" style={{ marginLeft: 3 }} />,
-		url: '/labtest'
-	},
-	{
-		name: "About Us",
-		icon: <InfoIcon />,
-		url: '/about'
-	},
-]
+
+function stringToColor(string) {
+	let hash = 0;
+	let i;
+	const alphabets = 'abcdefghijklmnopqrstuvwxyz';
+	let str = string.length > 3 ? string : `${string + Math.floor(Math.random() * alphabets.length)}`
+
+	for (i = 0; i < str.length; i++) {
+		hash = string.charCodeAt(i) + ((hash << 5) - hash);
+	}
+
+	let color = '#';
+
+	for (i = 0; i < 3; i++) {
+		const value = (hash >> (i * 8)) & 0xff;
+		color += `${value.toString(16)}`;
+	}
+
+	return color;
+}
+
+function stringAvatar(name) {
+	return {
+		sx: {
+			bgcolor: stringToColor(name),
+		},
+		children: `${name.slice(0, 1)}`,
+	};
+}
 
 export default function Index(props) {
+	const { isLoggedIn, login, logout } = useAuth();
+
+
+	const profile = [
+		{
+			name: "Profile",
+			icon: <PersonOutlineIcon />
+		},
+		{
+			name: "Dashboard",
+			icon: <GridView />
+		},
+		{
+			name: isLoggedIn ? 'Logout' : 'Login',
+			icon: ''
+		},
+	]
+	const img = ""
+	const menu = [
+		{
+			name: "Home",
+			icon: <HomeIcon />,
+			url: '/home'
+		},
+		{
+			name: "Services",
+			icon: <MedicalServicesIcon size="lg" />,
+			url: '/services'
+		},
+		{
+			name: "Doctors",
+			icon: <FontAwesomeIcon icon={faUserDoctor} size="lg" style={{ marginLeft: 3 }} />,
+			url: '/doctors'
+		},
+		{
+			name: "Lab Test",
+			icon: <FontAwesomeIcon icon={faFlaskVial} size="lg" style={{ marginLeft: 3 }} />,
+			url: '/labtest'
+		},
+		{
+			name: "About Us",
+			icon: <InfoIcon style={{ marginLeft: 4 }} />,
+			url: '/about'
+		},
+	]
+
+	const [activeMenu, setActiveMenu] = useState(null);
+	const handleMenuClick = (menu) => {
+		setActiveMenu(menu);
+	};
 	return (
 		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<Stack
-						component={"img"}
-						src={logo}
-						width="40px"
-						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-					/>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							display: { xs: "none", md: "flex" },
-							fontFamily: "monospace",
-							fontWeight: 700,
-							color: "#409bd8",
-							textDecoration: "none",
-						}}
-					>
-						HEALTH
-					</Typography>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							mr: 2,
-							display: { xs: "none", md: "flex" },
-							fontFamily: "monospace",
-							fontWeight: 700,
-							color: "#65138f",
-							textDecoration: "none",
-						}}
-					>
-						CARE
-					</Typography>
+					<Link href='/signin' style={{ cursor: "pointer", textDecoration: "none" }}>
+						<Stack direction={"row"}>
+							<Stack
+								component={"img"}
+								src={logo}
+								width="40px"
+								sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+							/>
+							<Typography
+								variant="h6"
+								noWrap
+								sx={{
+									display: { xs: "none", md: "flex" },
+									fontFamily: "monospace",
+									fontWeight: 700,
+									color: "#409bd8",
+									textDecoration: "none",
+								}}
+							>
+								HEALTH
+							</Typography>
+							<Typography
+								variant="h6"
+								noWrap
+								sx={{
+									mr: 2,
+									display: { xs: "none", md: "flex" },
+									fontFamily: "monospace",
+									fontWeight: 700,
+									color: "#65138f",
+									textDecoration: "none",
+								}}
+							>
+								CARE
+							</Typography>
+						</Stack>
+					</Link>
 					<Drawer
 						array={menu}
 						BoxSX={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 						button="MenuButton"
 						anchor="left"
 						display={` xs: "block", md: "none" `}
+						tip="Open Menubar"
 					>
 						<MenuIcon style={{ color: "black" }} />
 					</Drawer>
@@ -143,30 +183,29 @@ export default function Index(props) {
 								to={url}
 								sx={{
 									textDecoration: "none",
-									
+
 								}}
 							>
 								<Typography
 									key={name}
 									variant="body1"
-									mx={1}
-									color="black"
+									mx={2}
+									fontWeight={"bold"}
+									color={activeMenu === name ? '#409bd8' : '#65138f'}
+									onClick={() => handleMenuClick(name)}
 									sx={{
+										textShadow: activeMenu === name ? "4px 4px 10px rgba(0,0,0,0.5)" : "",
+										opacity: activeMenu === null ? 1 : activeMenu === name ? 1 : 0.5,
 										cursor: "pointer",
 										'&:hover': {
-											color: 'red',
-										  },
+											color: '#409bd8',
+											textShadow: "4px 4px 10px rgba(0,0,0,0.5)"
+										},
 									}}
 								>
 									{name}
 								</Typography>
 							</Link>
-							// <Button
-							// 	key={name}
-							// 	sx={{ my: 2, color: "black", display: "block" }}
-							// >
-							// 	{name}
-							// </Button>
 						))}
 					</Box>
 					<Drawer
@@ -175,8 +214,11 @@ export default function Index(props) {
 						button="ProfileButton"
 						anchor="right"
 						display="block"
+						tip="Open Profile"
 					>
-						<Avatar>{"Kush".slice(0, 1)}</Avatar>
+						{
+							img ? <Avatar src={img} /> : <Avatar {...stringAvatar('Kush')} />
+						}
 					</Drawer>
 				</Toolbar>
 			</Container>

@@ -1,10 +1,17 @@
 import React , {useState} from 'react'
-import { Drawer ,Toolbar , Divider , List , ListItem , ListItemButton , ListItemIcon , ListItemText , Box , Tooltip , IconButton } from '@mui/material';
+import { Drawer ,Toolbar , Divider , List , ListItem , Link , ListItemButton , ListItemIcon , ListItemText , Box , Tooltip , IconButton , Typography } from '@mui/material';
 import PropTypes from "prop-types";
+import { useNavigate } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
 export default function Index(props) {
+  const navigate = useNavigate();
+  const [activeMenu, setActiveMenu] = useState(null);
+	const handleMenuClick = (menu) => {
+		setActiveMenu(menu);
+	};
   const { window } = props;
 
   const [selectedButton, setSelectedButton] = useState(null);
@@ -37,13 +44,32 @@ export default function Index(props) {
       <Toolbar />
       <Divider />
       <List>
-        {props.array?.map(({ name, icon }) => (
+        {props.array?.map(({ name, icon , url}) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton>
+            <ListItemButton >
               <ListItemIcon>
                 {icon}
               </ListItemIcon>
-              <ListItemText primary={name} />
+								<Typography
+									key={name}
+									variant="body1"
+									my={1}
+									fontWeight={"bold"}
+									color={activeMenu===name ? '#409bd8' : '#65138f'}
+									onClick={() => {handleMenuClick(name)
+                  navigate(url)}}
+									sx={{
+										textShadow : activeMenu===name ?"4px 4px 10px rgba(0,0,0,0.5)":"",
+										opacity:activeMenu===null? 1 : activeMenu===name ? 1 : 0.5,
+										cursor: "pointer",
+										'&:hover': {
+											color: '#409bd8',
+											textShadow: "4px 4px 10px rgba(0,0,0,0.5)"
+										},
+									}}
+								>
+									{name}
+								</Typography>
             </ListItemButton>
           </ListItem>
         ))}
@@ -57,7 +83,7 @@ export default function Index(props) {
 
   return (
     <Box sx={props.BoxSX}>
-      <Tooltip title="Open Menubar">
+      <Tooltip title={props.tip}>
         <IconButton
           onClick={(e) => {
             e.preventDefault()

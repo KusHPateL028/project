@@ -25,6 +25,8 @@ export default function SetUsername() {
 
     const validateData = () => {
         const err = {}
+        const regex =/^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{8,})[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]+$/;
+
         if (inputValue.userName === "") {
             err.userName = 'Enter Username'
         }
@@ -36,6 +38,12 @@ export default function SetUsername() {
         }
         if(inputValue.password !== inputValue.confirmPassword){
             err.confirmPassword="Password does not matched"
+        }
+        if(inputValue.confirmPassword !=="" &&
+            inputValue.password === inputValue.confirmPassword && 
+            !regex.test(inputValue.password)){
+            err.confirmPassword = 
+            "Password requires 7 characters or numbers and 1 special character."            
         }
         return err;
     }
@@ -53,7 +61,7 @@ export default function SetUsername() {
         <Layout width="800px" height="500px">
             <Stack spacing={3} alignItems={"center"} width="50%" component="form" justifyContent={"center"} onSubmit={clickHandler}>
                 <Typography variant='h4' color="#0056FB" style={{ marginBottom: "20px", marginLeft: "40px" }}>Set User Name</Typography>
-                <Stack spacing={2} alignItems={"center"}>
+                <Stack spacing={2} alignItems={"center"} width="100%">
 
                     <Stack direction="row" spacing={2} height={"55px"}>
                         <PersonOutlineIcon style={{ marginTop: "10px" }} />
@@ -69,7 +77,7 @@ export default function SetUsername() {
 
                         ></Input>
                     </Stack>
-                    <Stack height={"55px"}>
+                    <Stack width='70%' height={"55px"}>
                         <Password
                             label="Password"
                             name="password"
@@ -79,10 +87,10 @@ export default function SetUsername() {
                             onChange={changeHandler}
                             err={Boolean(err.password)}
                             helperText={err.password}
-                            sx={{ width: "75%" }}
+                            sx={{ width: "100%" }}
                         />
                     </Stack>
-                    <Stack height={"55px"}>
+                    <Stack width='70%' height={"55px"}>
                         <Password
                             label="Confirm Password"
                             name="confirmPassword"
@@ -92,7 +100,7 @@ export default function SetUsername() {
                             onChange={changeHandler}
                             err={Boolean(err.confirmPassword)}
                             helperText={err.confirmPassword}
-                            sx={{ width: "75%" }}
+                            sx={{ width: "100%" }}
                         />
                     </Stack>
                     <Stack direction="column" justifyContent={"center"} style={{ marginTop: "30px", marginLeft: "20px" }}>

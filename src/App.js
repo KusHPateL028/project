@@ -11,15 +11,19 @@ export default function App() {
             <Routes>
                 <Route
                     exact path="/"
+                    element={<Home />}
+                />
+                <Route
+                    exact path="/home"
+                    element={<Home />}
+                />
+                <Route
+                    exact path="/login"
                     element={<Login />}
                 />
                 <Route
                     exact path="/signin"
                     element={<Signin />}
-                />
-                <Route
-                    exact path="/home"
-                    element={<Home />}
                 />
                 <Route
                     exact path="/setUserName"
