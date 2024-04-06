@@ -48,8 +48,6 @@ export default function Index() {
         setInputValue((prevData) => ({ ...prevData, [name]: value }))
     }
 
-    console.log(inputValue)
-
     const validateData = () => {
         const err = {}
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -79,17 +77,10 @@ export default function Index() {
         const err = validateData();
         if (Object.keys(err).length === 0) {
             data.push(inputValue)
-            console.log("Login")
         } else {
             setErr(err);
         }
     }
-
-    console.log(data)
-
-
-   
-
 
     const gender = ["Male", "Female", "Other"];
 

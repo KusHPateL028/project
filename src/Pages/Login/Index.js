@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom'
 import { PersonOutline as PersonOutlineIcon } from '@mui/icons-material';
 import LoginData from '../../Data/LoginData/LoginData'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext'
 
 export default function Index() {
     const data = LoginData;
     const navigate = useNavigate();
+    const { isLoggedIn, login, logout } = useAuth();
 
     const [value, setValue] = useState({
         userName: '',
@@ -35,6 +37,7 @@ export default function Index() {
                     count++;
                     if (data.password === value.password) {
                         navigate('/home');
+                        login();
                     } else {
                         err.password = 'Invalid Password'
                     }

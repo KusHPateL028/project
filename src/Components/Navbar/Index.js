@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Stack, AppBar, Box, Toolbar, Typography, Container, Avatar, Link } from "@mui/material";
-import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
+import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView , Login } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logos/logo.png";
@@ -52,7 +52,8 @@ export default function Index(props) {
 		},
 		{
 			name: isLoggedIn ? 'Logout' : 'Login',
-			icon: ''
+			icon: isLoggedIn ? <Logout/> : <Login/>,
+			url : isLoggedIn ? "/login" : '/login'
 		},
 	]
 	const img = ""
@@ -217,7 +218,7 @@ export default function Index(props) {
 						tip="Open Profile"
 					>
 						{
-							img ? <Avatar src={img} /> : <Avatar {...stringAvatar('Kush')} />
+							isLoggedIn ? img ? <Avatar src={img} /> : <Avatar {...stringAvatar('Kush')} /> : <Avatar/>
 						}
 					</Drawer>
 				</Toolbar>
