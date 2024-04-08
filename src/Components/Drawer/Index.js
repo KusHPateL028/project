@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   Toolbar,
   Divider,
   List,
   ListItem,
-  Link,
+  Stack,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Box,
   Tooltip,
   IconButton,
@@ -17,27 +16,28 @@ import {
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import Avatar from '../Avatar/Index'
 
 const drawerWidth = 240;
 
 export default function Index(props) {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState(null);
+  const [url, setURL] = useState(null)
   const { isLoggedIn, login, logout } = useAuth();
-  console.log(activeMenu);
-  const handleMenuClick = (menu) => {
+  const handleMenuClick = (menu, url) => {
     setActiveMenu(menu);
+    setURL(url)
   };
-  const { window } = props;
+  const { windowScreen } = props;
 
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
   };
-  console.log(selectedButton);
 
-  const [mobileOpen, setMobileOpen] = useState(false); /* */
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
   const handleDrawerClose = () => {
@@ -54,15 +54,57 @@ export default function Index(props) {
       setMobileOpen(!mobileOpen);
     }
   };
+  const random = () => {
+    if (activeMenu === "Logout") {
+      let Logout = window.confirm("Are you sure you want to Logout")
+      console.log(Logout)
+      if (Logout) {
+        navigate(url);
+        logout();
+      }else{
+        setActiveMenu(null)
+        setURL(null)
+      }
+    } else{
+      navigate(url);
+    }
+  }
+  useEffect(() => {
+    random();
+  })
 
   const drawer = (
     <div>
       <Toolbar />
+      {
+        props.arrayName==="profile"?
+        <Stack direction="row" marginTop={"-60px"} py={3} alignItems={"center"} justifyContent={"center"} spacing={2}>
+          <Avatar name="Kush" />
+          <Typography variant="h4" style={{ color: "#409bd8" }}>Kush</Typography>
+        </Stack>:""
+      }
       <Divider />
       <List>
         {props.array?.map(({ name, icon, url }) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              sx={{
+                textShadow:
+                  activeMenu === name ? "4px 4px 10px rgba(0,0,0,0.5)" : "",
+                opacity:
+                  activeMenu === null ? 1 : activeMenu === name ? 1 : 0.5,
+                cursor: "pointer",
+                "&:hover": {
+                  textShadow: "4px 4px 10px rgba(0,0,0,0.5)",
+                  "& .MuiTypography-root": {
+                    color: "#409bd8",
+                  },
+                },
+              }}
+              onClick={() => {
+                handleMenuClick(name,url);
+              }}
+            >
               <ListItemIcon>{icon}</ListItemIcon>
               <Typography
                 key={name}
@@ -70,30 +112,6 @@ export default function Index(props) {
                 my={1}
                 fontWeight={"bold"}
                 color={activeMenu === name ? "#409bd8" : "#65138f"}
-                onClick={() => {
-                  handleMenuClick(name);
-                  if (activeMenu[0] === "Logout") {
-                    const Logout = window.confirm(
-                      "Are you sure you want to Logout?"
-                    );
-                    if (Logout) {
-                      navigate(url);
-                    }
-                  } else {
-                    navigate(url);
-                  }
-                }}
-                sx={{
-                  textShadow:
-                    activeMenu === name ? "4px 4px 10px rgba(0,0,0,0.5)" : "",
-                  opacity:
-                    activeMenu === null ? 1 : activeMenu === name ? 1 : 0.5,
-                  cursor: "pointer",
-                  "&:hover": {
-                    color: "#409bd8",
-                    textShadow: "4px 4px 10px rgba(0,0,0,0.5)",
-                  },
-                }}
               >
                 {name}
               </Typography>
@@ -106,7 +124,7 @@ export default function Index(props) {
   );
 
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    windowScreen !== undefined ? () => windowScreen().document.body : undefined;
 
   return (
     <Box sx={props.BoxSX}>
@@ -153,5 +171,5 @@ export default function Index(props) {
 }
 
 Index.propTypes = {
-  window: PropTypes.func,
+  windowScreen: PropTypes.func,
 };

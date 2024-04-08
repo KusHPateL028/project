@@ -29,6 +29,10 @@ export default function App() {
                     exact path="/setUserName"
                     element={<SetUsername />}
                 />
+                <Route
+                    exact path="*"
+                    element={<div>Not Found</div>}
+                />
             </Routes>
         </Router>
     )

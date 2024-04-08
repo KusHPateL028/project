@@ -1,45 +1,17 @@
 import React, { useState } from "react";
-import { Stack, AppBar, Box, Toolbar, Typography, Container, Avatar, Link } from "@mui/material";
-import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView , Login } from '@mui/icons-material';
+import { Stack, AppBar, Box, Toolbar, Typography, Container, Link } from "@mui/material";
+import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView, Login } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logos/logo.png";
 import Drawer from '../Drawer/Index'
 import { useAuth } from '../../Context/AuthContext'
-
-
-function stringToColor(string) {
-	let hash = 0;
-	let i;
-	const alphabets = 'abcdefghijklmnopqrstuvwxyz';
-	let str = string.length > 3 ? string : `${string + Math.floor(Math.random() * alphabets.length)}`
-
-	for (i = 0; i < str.length; i++) {
-		hash = string.charCodeAt(i) + ((hash << 5) - hash);
-	}
-
-	let color = '#';
-
-	for (i = 0; i < 3; i++) {
-		const value = (hash >> (i * 8)) & 0xff;
-		color += `${value.toString(16)}`;
-	}
-
-	return color;
-}
-
-function stringAvatar(name) {
-	return {
-		sx: {
-			bgcolor: stringToColor(name),
-		},
-		children: `${name.slice(0, 1)}`,
-	};
-}
+import { useNavigate } from 'react-router-dom';
+import Avatar from '../Avatar/Index'
 
 export default function Index(props) {
+	const navigate = useNavigate();
 	const { isLoggedIn, login, logout } = useAuth();
-
 
 	const profile = [
 		{
@@ -51,9 +23,9 @@ export default function Index(props) {
 			icon: <GridView />
 		},
 		{
-			name: isLoggedIn ? 'Logout' : 'Login',
-			icon: isLoggedIn ? <Logout/> : <Login/>,
-			url : isLoggedIn ? "/login" : '/login'
+			name: 'Logout',
+			icon: <Logout /> ,
+			url: "/login" 
 		},
 	]
 	const img = ""
@@ -91,9 +63,9 @@ export default function Index(props) {
 	};
 	return (
 		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
-			<Container maxWidth="xl">
+			<Container>
 				<Toolbar disableGutters>
-					<Link href='/signin' style={{ cursor: "pointer", textDecoration: "none" }}>
+					<Link href='/' style={{ cursor: "pointer", textDecoration: "none" }}>
 						<Stack direction={"row"}>
 							<Stack
 								component={"img"}
@@ -132,6 +104,7 @@ export default function Index(props) {
 					</Link>
 					<Drawer
 						array={menu}
+						arrayName = "menu"
 						BoxSX={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 						button="MenuButton"
 						anchor="left"
@@ -209,18 +182,24 @@ export default function Index(props) {
 							</Link>
 						))}
 					</Box>
-					<Drawer
-						array={profile}
-						BoxSX={{ flexGrow: 0 }}
-						button="ProfileButton"
-						anchor="right"
-						display="block"
-						tip="Open Profile"
-					>
-						{
-							isLoggedIn ? img ? <Avatar src={img} /> : <Avatar {...stringAvatar('Kush')} /> : <Avatar/>
-						}
-					</Drawer>
+					{
+						isLoggedIn ?
+							<Drawer
+								array={profile}
+								arrayName = "profile"
+								BoxSX={{ flexGrow: 0 }}
+								button="ProfileButton"
+								anchor="right"
+								display="block"
+								tip="Open Profile"
+							>
+								{img ? <Avatar src={img} /> : <Avatar name="Kush"/>}
+							</Drawer>
+						:<Typography variant="body1" color={"red"} style={{cursor:"pointer"}} onClick={()=>{
+							navigate('/login')
+						}}>Log In</Typography>
+							
+					}
 				</Toolbar>
 			</Container>
 		</AppBar>

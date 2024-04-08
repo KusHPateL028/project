@@ -17,7 +17,7 @@ const data=[
     {
         id:4,
         userName:"Meet",
-        password:"Meet@1234"
+        password:"Meet"
     },
 ];
 
