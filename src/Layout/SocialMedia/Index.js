@@ -5,9 +5,13 @@ import { LoginSocialFacebook, LoginSocialTwitter } from "reactjs-social-login";
 import { Google, FacebookRounded, X } from "@mui/icons-material";
 import { Link } from "react-router-dom"
 import Button from "../../Components/Button/Index"
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext'
 
 export default function Index(props) {
-    const login = useGoogleLogin({
+    const navigate = useNavigate();
+    const { isLoggedIn, login, logout ,userData , LoginData} = useAuth();
+    const googleLogin = useGoogleLogin({
         onSuccess: tokenResponse => {
             const accessToken = tokenResponse.access_token;
 
@@ -17,7 +21,11 @@ export default function Index(props) {
                 },
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
+                .then(data =>{
+                    navigate('/home');
+                    userData(data)
+                    login();
+                })
                 .catch(error => console.error('Error fetching user info:', error));
         }
     });
@@ -26,7 +34,7 @@ export default function Index(props) {
             <Typography variant="body1">Or Sign Up Using</Typography>
             <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
                 <Google
-                    onClick={() => login()}
+                    onClick={() => googleLogin()}
                     fontSize="large"
                     cursor="pointer"
                     border={"1px solid red"}
@@ -50,7 +58,7 @@ export default function Index(props) {
             <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "40px" }}>
                 <Typography variant="body1">---------------Already have an account---------------</Typography>
 
-                <Link to="/" style={{ width: "50%" }}>
+                <Link to="/login" style={{ width: "50%" }}>
                     <Button
                         variant="outlined"
                         text="Log In"

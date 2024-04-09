@@ -102,12 +102,11 @@ export default function SetUsername() {
               helperText={err.userName}
             ></Input>
           </Stack>
-          <Stack width="65%" height={"55px"}>
+          <Stack width="70%" height={"55px"}>
             <Password
               label="Password"
               name="password"
               size="small"
-              justifyContent="center"
               value={inputValue.password}
               onChange={changeHandler}
               err={Boolean(err.password)}
@@ -115,12 +114,11 @@ export default function SetUsername() {
               sx={{ width: "100%" }}
             />
           </Stack>
-          <Stack width="65%" height={"55px"}>
+          <Stack width="70%" height={"55px"}>
             <Password
               label="Confirm Password"
               name="confirmPassword"
               size="small"
-              justifyContent="center"
               value={inputValue.confirmPassword}
               onChange={changeHandler}
               err={Boolean(err.confirmPassword)}

@@ -1,10 +1,16 @@
 import { LocalSee } from '@mui/icons-material';
-import React, { createContext, useState, useContext , useEffect} from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  localStorage.removeItem('login')
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('login'))
+  const [loginData , setData] = useState('')
+
+  const userData = (data) =>{ 
+    setData(data);
+  }
 
   const login = () => {
     localStorage.setItem('login',true)
@@ -12,13 +18,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.setItem('login',false)
+    localStorage.removeItem('login')
     setIsLoggedIn(false);
   };
 
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout , userData , loginData}}>
       {children}
     </AuthContext.Provider>
   );

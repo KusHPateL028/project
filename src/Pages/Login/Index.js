@@ -6,14 +6,14 @@ import Button from '../../Components/Button/Index'
 import Password from '../../Components/Password/Index'
 import { Link } from 'react-router-dom'
 import { PersonOutline as PersonOutlineIcon } from '@mui/icons-material';
-import LoginData from '../../Data/LoginData/LoginData'
+import Data from '../../Data/LoginData/LoginData'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext'
 
 export default function Index() {
-    const data = LoginData;
+    const data = Data;
     const navigate = useNavigate();
-    const { isLoggedIn, login, logout } = useAuth();
+    const { login , userData } = useAuth();
 
     const [value, setValue] = useState({
         userName: '',
@@ -37,6 +37,7 @@ export default function Index() {
                     count++;
                     if (data.password === value.password) {
                         navigate('/home');
+                        userData(value)
                         login();
                     } else {
                         err.password = 'Invalid Password'

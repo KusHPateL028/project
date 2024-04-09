@@ -11,10 +11,6 @@ export default function Index(props) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            {/* <DemoContainer components={['DatePicker']}> */}
-
-            {/* <Box size="small"> */}
-
             <DatePicker
                 size="small"
                 label={props.label}
@@ -22,8 +18,6 @@ export default function Index(props) {
                 onChange={(newValue) => setValue(newValue)}
                 maxDate={dayjs(new Date())}
             />
-            {/* </Box> */}
-            {/* </DemoContainer> */}
         </LocalizationProvider>
     );
 }

@@ -5,10 +5,10 @@ function stringToColor(string) {
 	let hash = 0;
 	let i;
 	const alphabets = 'abcdefghijklmnopqrstuvwxyz';
-	let str = string.length > 3 ? string : `${string + Math.floor(Math.random() * alphabets.length)}`
+	let str = string?.length > 3 ? string : `${string + Math.floor(Math.random() * alphabets.length)}`
 
 	for (i = 0; i < str.length; i++) {
-		hash = string.charCodeAt(i) + ((hash << 5) - hash);
+		hash = string?.charCodeAt(i) + ((hash << 5) - hash);
 	}
 
 	let color = '#';
@@ -26,12 +26,13 @@ function stringAvatar(name) {
 		sx: {
 			bgcolor: stringToColor(name),
 		},
-		children: `${name.slice(0, 1)}`,
+		children: `${name?.slice(0, 1)}`,
 	};
 }
 
 export default function Index(props) {
+	console.log(props)
   return (
-    <Avatar src={props.img} {...stringAvatar(props.name)}  style={{cursor:"pointer"}} />
+    <Avatar src={props.src}  {... stringAvatar(props.name)} style={{cursor:"pointer"}} />
   )
 }

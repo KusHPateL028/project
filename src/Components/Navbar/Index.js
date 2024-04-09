@@ -8,10 +8,13 @@ import Drawer from '../Drawer/Index'
 import { useAuth } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import Avatar from '../Avatar/Index'
+import Button from '../Button/Index'
 
 export default function Index(props) {
 	const navigate = useNavigate();
 	const { isLoggedIn, login, logout } = useAuth();
+
+	const userName = (props.data.userName) || (props.data.name)
 
 	const profile = [
 		{
@@ -24,11 +27,12 @@ export default function Index(props) {
 		},
 		{
 			name: 'Logout',
-			icon: <Logout /> ,
-			url: "/login" 
+			icon: <Logout />,
+			url: "/login"
 		},
 	]
-	const img = ""
+	let img = props.data.picture || ''
+
 	const menu = [
 		{
 			name: "Home",
@@ -63,7 +67,7 @@ export default function Index(props) {
 	};
 	return (
 		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
-			<Container>
+			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<Link href='/' style={{ cursor: "pointer", textDecoration: "none" }}>
 						<Stack direction={"row"}>
@@ -104,7 +108,7 @@ export default function Index(props) {
 					</Link>
 					<Drawer
 						array={menu}
-						arrayName = "menu"
+						arrayName="menu"
 						BoxSX={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 						button="MenuButton"
 						anchor="left"
@@ -186,19 +190,31 @@ export default function Index(props) {
 						isLoggedIn ?
 							<Drawer
 								array={profile}
-								arrayName = "profile"
+								arrayName="profile"
 								BoxSX={{ flexGrow: 0 }}
 								button="ProfileButton"
 								anchor="right"
 								display="block"
 								tip="Open Profile"
+								userName={userName}
 							>
-								{img ? <Avatar src={img} /> : <Avatar name="Kush"/>}
+								{img? <Avatar src={img} /> : <Avatar name={userName} />}
 							</Drawer>
-						:<Typography variant="body1" color={"red"} style={{cursor:"pointer"}} onClick={()=>{
-							navigate('/login')
-						}}>Log In</Typography>
-							
+							: 
+							<Button
+								variant="contained"
+								onClick={() => {
+									navigate('/login')
+								}} 
+								text="Log In"
+								style={{
+									backgroundColor:"red",
+									'&:hover':{
+										backgroundColor:"yellow"
+									}
+								}}
+							/>
+
 					}
 				</Toolbar>
 			</Container>
