@@ -210,7 +210,7 @@ export default function Index(props) {
 								style={{
 									backgroundColor:"red",
 									'&:hover':{
-										backgroundColor:"yellow"
+										backgroundColor:"transparent"
 									}
 								}}
 							/>
