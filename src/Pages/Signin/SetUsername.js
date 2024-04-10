@@ -10,7 +10,7 @@ import { useAuth } from "../../Context/AuthContext";
 
 export default function SetUsername() {
   const navigate = useNavigate();
-  const { isLoggedIn, login, logout } = useAuth();
+  const { login } = useAuth();
 
   const [inputValue, setValue] = useState({
     userName: "",

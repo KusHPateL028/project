@@ -1,4 +1,3 @@
-import { LocalSee } from '@mui/icons-material';
 import React, { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext();

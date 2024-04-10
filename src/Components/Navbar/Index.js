@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Stack, AppBar, Box, Toolbar, Typography, Container, Link } from "@mui/material";
-import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView, Login } from '@mui/icons-material';
+import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logos/logo.png";
@@ -12,10 +12,16 @@ import Button from '../Button/Index'
 
 export default function Index(props) {
 	const navigate = useNavigate();
-	const { isLoggedIn, login, logout } = useAuth();
+	const { isLoggedIn } = useAuth();
 
-	const userName = (props.data.userName) || (props.data.name)
+	const LoginData = props.data
+	console.log("Kush")
+	console.log(LoginData)
+	console.log("Username")
+	console.log(LoginData.userName)
 
+	const userName = (LoginData.userName) || (LoginData.name)
+	let img =  LoginData.picture?.data?.url || LoginData.picture || ''
 	const profile = [
 		{
 			name: "Profile",
@@ -31,7 +37,6 @@ export default function Index(props) {
 			url: "/login"
 		},
 	]
-	let img = props.data.picture || ''
 
 	const menu = [
 		{
@@ -197,6 +202,7 @@ export default function Index(props) {
 								display="block"
 								tip="Open Profile"
 								userName={userName}
+								img={img}
 							>
 								{img? <Avatar src={img} /> : <Avatar name={userName} />}
 							</Drawer>

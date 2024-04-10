@@ -1,10 +1,9 @@
-import { Stack, Container, Typography } from '@mui/material'
+import { Stack , Typography } from '@mui/material'
 import React from 'react'
 import Button from '../Button/Index'
 import Banner from '../../Assets/Images/Banner/banner.jpg'
 
 export default function Index() {
-  console.log(window.width)
   return (
     <Stack style={{
       backgroundImage: `url(${Banner})`,

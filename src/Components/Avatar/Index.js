@@ -31,8 +31,11 @@ function stringAvatar(name) {
 }
 
 export default function Index(props) {
-	console.log(props)
-  return (
-    <Avatar src={props.src}  {... stringAvatar(props.name)} style={{cursor:"pointer"}} />
-  )
+	return (
+		<Avatar
+			src={props.src}
+			{...stringAvatar(props.name)}
+			style={{ cursor: "pointer" ,border:"1px solid black"}}
+		/>
+	)
 }

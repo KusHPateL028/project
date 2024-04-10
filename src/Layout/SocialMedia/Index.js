@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack, Typography } from '@mui/material'
 import { useGoogleLogin } from '@react-oauth/google';
-import { LoginSocialFacebook, LoginSocialTwitter } from "reactjs-social-login";
+import { LoginSocialFacebook } from "reactjs-social-login";
 import { Google, FacebookRounded, X } from "@mui/icons-material";
 import { Link } from "react-router-dom"
 import Button from "../../Components/Button/Index"
@@ -10,18 +10,17 @@ import { useAuth } from '../../Context/AuthContext'
 
 export default function Index(props) {
     const navigate = useNavigate();
-    const { isLoggedIn, login, logout ,userData , LoginData} = useAuth();
+    const { login, userData } = useAuth();
     const googleLogin = useGoogleLogin({
         onSuccess: tokenResponse => {
             const accessToken = tokenResponse.access_token;
-
             fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             })
                 .then(response => response.json())
-                .then(data =>{
+                .then(data => {
                     navigate('/home');
                     userData(data)
                     login();
@@ -29,6 +28,7 @@ export default function Index(props) {
                 .catch(error => console.error('Error fetching user info:', error));
         }
     });
+
     return (
         <Stack direction="column" spacing={3} alignItems={"center"} style={props.sx}>
             <Typography variant="body1">Or Sign Up Using</Typography>
@@ -42,7 +42,11 @@ export default function Index(props) {
                 />
                 <LoginSocialFacebook
                     appId="2140906686308230"
-                    onResolve={(tokenResponse) => console.log(tokenResponse)}
+                    onResolve={(tokenResponse) => {
+                        navigate('/home');
+                        userData(tokenResponse.data)
+                        login();
+                    }}
                     onReject={(error) => {
                         console.log(error);
                     }}

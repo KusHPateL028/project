@@ -85,7 +85,6 @@ export default function Index(props) {
 
     const err = validateData();
     if (Object.keys(err).length === 0) {
-      data.push(inputValue);
       navigate("/setUserName");
     } else {
       setErr(err);
@@ -211,7 +210,6 @@ export default function Index(props) {
           <Button
             width="40%"
             variant="contained"
-            type="submit"
             text="Create Account"
           />
         </Stack>

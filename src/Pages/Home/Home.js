@@ -4,7 +4,7 @@ import Banner from '../../Components/Banner/Index'
 import { useAuth } from '../../Context/AuthContext'
 
 export default function Home() {
-  const { isLoggedIn, login, logout ,userData , loginData} = useAuth();
+  const { loginData} = useAuth();
   const data = loginData;
   return (
     <>

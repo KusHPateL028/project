@@ -27,7 +27,8 @@ export default function Index() {
         const { name, value } = event.target;
         setValue((prev) => ({ ...prev, [name]: value }))
     }
-
+    const result = data.filter((obj)=>obj.userName===value.userName)
+    console.log(result)
     const validateData = () => {
         const err = {}
         let count=0;
@@ -37,7 +38,7 @@ export default function Index() {
                     count++;
                     if (data.password === value.password) {
                         navigate('/home');
-                        userData(value)
+                        userData(result[0])
                         login();
                     } else {
                         err.password = 'Invalid Password'

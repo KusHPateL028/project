@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../../Layout/Signin/Index"
 import { useTheme } from '@mui/material/styles'
-import { Tabs, Tab, Box, AppBar, Typography ,Stack } from '@mui/material';
+import { Tabs, Tab, Box, AppBar, Typography } from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
 import PatientSignin from './PatientSignin'
 import DoctorSignin from './DoctorSignin'
@@ -35,7 +35,7 @@ export default function Index() {
     const [value, setValue] = useState(0);
     const [role , setRole] = useState('Patient');
 
-    const handleChange1 = (event, newValue) => {
+    const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
@@ -60,14 +60,14 @@ export default function Index() {
                 <AppBar position="static" color="default">
                     <Tabs
                         value={value}
-                        onChange={handleChange1}
+                        onChange={handleChange}
                         indicatorColor="none"
                         textColor="primary"
                         variant="fullWidth"
                         aria-label="action tabs example"
                     >
-                        <Tab label="Patient" {...a11yProps(0)} sx={{ borderTopRightRadius: "8px", borderBottomRightRadius: "8px", background: value === 0 ? "linear-gradient(45deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)" : "" }} />
-                        <Tab label="Doctor" {...a11yProps(1)} sx={{ borderTopLeftRadius: "8px", borderBottomLeftRadius: "8px", background: value === 1 ? "linear-gradient(315deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)" : "" }} />
+                        <Tab label="Patient" onClick={()=>setRole('Patient')} {...a11yProps(0)} sx={{ borderTopRightRadius: "8px", borderBottomRightRadius: "8px", background: value === 0 ? "linear-gradient(45deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)" : "" }} />
+                        <Tab label="Doctor" onClick={()=>setRole('Doctor')} {...a11yProps(1)} sx={{ borderTopLeftRadius: "8px", borderBottomLeftRadius: "8px", background: value === 1 ? "linear-gradient(315deg, rgba(64,155,216,1) 0%, rgba(101,19,143,0.1) 55%)" : "" }} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews

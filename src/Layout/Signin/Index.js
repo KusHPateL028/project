@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import logo from '../../Assets/Images/logos/logo.png'
 import signIn from '../../Assets/Images/Signin/signin.svg'
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function Index(props) {
 

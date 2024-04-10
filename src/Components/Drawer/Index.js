@@ -24,7 +24,7 @@ export default function Index(props) {
 	const navigate = useNavigate();
 	const [activeMenu, setActiveMenu] = useState(null);
 	const [url, setURL] = useState(null)
-	const { isLoggedIn, login, logout } = useAuth();
+	const { logout } = useAuth();
 	const handleMenuClick = (menu, url) => {
 		setActiveMenu(menu);
 		setURL(url)
@@ -77,7 +77,7 @@ export default function Index(props) {
 			{
 				props.arrayName === "profile" ?
 					<Stack direction="row" marginTop={"-60px"} py={3} alignItems={"center"} justifyContent={"center"} spacing={2}>
-						<Avatar name={props.userName} />
+						{props.img? <Avatar src={props.img} /> : <Avatar name={props.userName} />}
 						<Typography variant="h4" style={{ color: "#409bd8" }}>{props.userName.split(' ')[0]}</Typography>
 					</Stack> : ""
 			}
