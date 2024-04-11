@@ -15,10 +15,6 @@ export default function Index(props) {
 	const { isLoggedIn } = useAuth();
 
 	const LoginData = props.data
-	console.log("Kush")
-	console.log(LoginData)
-	console.log("Username")
-	console.log(LoginData.userName)
 
 	const userName = (LoginData.userName) || (LoginData.name)
 	let img =  LoginData.picture?.data?.url || LoginData.picture || ''

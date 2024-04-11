@@ -5,6 +5,7 @@ import { useAuth } from '../../Context/AuthContext'
 
 export default function Home() {
   const { loginData} = useAuth();
+
   const data = loginData;
   return (
     <>
