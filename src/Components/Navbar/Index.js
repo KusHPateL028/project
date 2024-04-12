@@ -167,6 +167,7 @@ export default function Index(props) {
 							>
 								<Typography
 									key={name}
+									fontSize="large"
 									variant="body1"
 									mx={2}
 									fontWeight={"bold"}
@@ -209,12 +210,14 @@ export default function Index(props) {
 									navigate('/login')
 								}} 
 								text="Log In"
-								style={{
-									backgroundColor:"red",
-									'&:hover':{
-										backgroundColor:"transparent"
-									}
-								}}
+								// sx={{
+								// 	backgroundColor:"red",
+								// 	'&:hover':{
+								// 		backgroundColor:"transparent",
+								// 		color:"red",
+								// 		border:"1px solid red"
+								// 	}
+								// }}
 							/>
 
 					}

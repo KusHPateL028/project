@@ -207,7 +207,7 @@ export default function Index(props) {
         </Stack>
         <Stack alignItems={"center"} style={{ margin: "30px 0" }}>
           <Button
-            width="40%"
+            sx={{width:"40%"}}
             type='submit'
             variant="contained"
             text="Create Account"

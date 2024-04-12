@@ -1,4 +1,4 @@
-import { Typography, Stack } from '@mui/material'
+import { Typography, Stack , Box } from '@mui/material'
 import Layout from '../../Layout/Signin/Index'
 import React, { useState } from 'react'
 import Input from '../../Components/Input/Index'
@@ -13,7 +13,7 @@ import { useAuth } from '../../Context/AuthContext'
 export default function Index() {
     const data = Data;
     const navigate = useNavigate();
-    const { login , userData } = useAuth();
+    const { login, userData } = useAuth();
 
     const [value, setValue] = useState({
         userName: '',
@@ -27,12 +27,12 @@ export default function Index() {
         const { name, value } = event.target;
         setValue((prev) => ({ ...prev, [name]: value }))
     }
-    const result = data.filter((obj)=>obj.userName===value.userName)
+    const result = data.filter((obj) => obj.userName === value.userName)
     console.log(result)
     const validateData = () => {
         const err = {}
-        let count=0;
-        if(data.length > 0){
+        let count = 0;
+        if (data.length > 0) {
             data.forEach((data) => {
                 if (data.userName === value.userName) {
                     count++;
@@ -45,8 +45,8 @@ export default function Index() {
                     }
                 }
             });
-            if(count===0){
-                err.userName='Invalid Username'
+            if (count === 0) {
+                err.userName = 'Invalid Username'
             }
         }
         return err;
@@ -64,10 +64,10 @@ export default function Index() {
 
     return (
         <Layout width="900px" height="525px" >
-            <Stack spacing={3}  padding="40px 55px" alignItems={"center"} width="50%" component="form" onSubmit={clickHandler} >
-                <Typography variant='h4' color="#0056FB" style={{marginBottom:"20px"}}>Log In</Typography>
-                <Stack direction="row"  spacing={2} height={"50px"}>
-                    <PersonOutlineIcon style={{marginTop:"10px"}}/>
+            <Stack spacing={3} padding="40px 55px" alignItems={"center"} width="50%" component="form" onSubmit={clickHandler} >
+                <Typography variant='h4' color="#0056FB" style={{ marginBottom: "20px" }}>Log In</Typography>
+                <Stack direction="row" spacing={2} height={"50px"}>
+                    <PersonOutlineIcon style={{ marginTop: "10px" }} />
                     <Input
                         label="User Name"
                         name="userName"
@@ -97,14 +97,18 @@ export default function Index() {
                         text="Log In"
                     />
                 </Stack>
-                <Stack spacing={4} alignItems={"center"} style={{ marginTop: "100px" }}>
-                    <Typography variant="span">--------------New to HealthCare--------------</Typography>
+                <Stack spacing={4} alignItems={"center"} style={{ marginTop: "100px" }} justifyContent={"center"} width={"100%"}>
+                    <Stack direction={"row"} width={"100%"}>
+                        <Stack borderTop={'2px solid black'} margin='auto 10px'  width={"20%"}></Stack>
+                        <Typography variant="span">New to HealthCare</Typography>
+                        <Stack borderTop={'2px solid black'}  margin='auto 10px' width={"20%"}></Stack>
+                    </Stack>
 
                     <Link to="/signin" style={{ width: '100%' }}>
                         <Button
                             variant='outlined'
                             text='Create Account'
-                            width="100%"
+                            sx={{ width: "100%" }}
                         />
                     </Link>
                 </Stack>

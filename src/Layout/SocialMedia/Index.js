@@ -30,7 +30,7 @@ export default function Index(props) {
     });
 
     return (
-        <Stack direction="column" spacing={3} alignItems={"center"} style={props.sx}>
+        <Stack direction="column" spacing={3} alignItems={"center"} style={props.sx} width={"100%"}>
             <Typography variant="body1">Or Sign Up Using</Typography>
             <Stack direction={"row"} spacing={4} alignItems={"center"} justifyContent={"center"}>
                 <Google
@@ -59,14 +59,18 @@ export default function Index(props) {
                 </LoginSocialFacebook>
                 <X />
             </Stack>
-            <Stack spacing={4} alignItems="center" style={{ width: "100%", marginTop: "40px" }}>
-                <Typography variant="body1">---------------Already have an account---------------</Typography>
+            <Stack spacing={4} alignItems="center" style={{marginTop: "40px" }} width={"100%"}>
+                <Stack direction={"row"} width={"100%"} justifyContent={"center"}>
+                    <Stack borderTop={'2px solid black'} margin='auto 10px' width={"20%"}></Stack>
+                    <Typography variant="span">Already have an account</Typography>
+                    <Stack borderTop={'2px solid black'} margin='auto 10px' width={"20%"}></Stack>
+                </Stack>
 
                 <Link to="/login" style={{ width: "50%" }}>
                     <Button
                         variant="outlined"
                         text="Log In"
-                        width="100%"
+                        sx={{ width: "100%" }}
                     />
                 </Link>
             </Stack>

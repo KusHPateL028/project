@@ -229,7 +229,7 @@ export default function Index() {
                 </Stack>
                 <Stack alignItems={"center"} style={{ marginTop: "25px" }}>
                     <Button
-                        width="50%"
+                        sx={{width:"50%"}}
                         variant="contained"
                         type="submit"
                         text="Create Account"

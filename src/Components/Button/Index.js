@@ -10,8 +10,7 @@ export default function Index(props) {
 			type={props.type}
 			onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-			sx={{width:props.width}}
-			style={props.style}
+			sx={props.sx}
 			onClick={props.onClick}
 		>{props.text}</Button>
 	)
