@@ -2,8 +2,6 @@ import { React } from 'react'
 import { TextField } from '@mui/material';
 
 export default function Index(props) {
-
-
     return (
         <TextField
             id="input-with-icon-textfield"

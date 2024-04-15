@@ -8,7 +8,6 @@ import {
   MailOutline,
   PhoneInTalk,
   Cake,
-  ConnectingAirportsOutlined,
 } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVenusMars } from "@fortawesome/free-solid-svg-icons";
@@ -207,7 +206,7 @@ export default function Index(props) {
         </Stack>
         <Stack alignItems={"center"} style={{ margin: "30px 0" }}>
           <Button
-            sx={{width:"40%"}}
+            sx={{ width: "40%" }}
             type='submit'
             variant="contained"
             text="Create Account"

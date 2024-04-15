@@ -122,7 +122,7 @@ export default function Index(props) {
 						component={"img"}
 						src={logo}
 						width="40px"
-						sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+						sx={{ display: { xs: "flex", md: "none" },mr:1}}
 					/>
 					<Typography
 						variant="h5"
@@ -210,14 +210,14 @@ export default function Index(props) {
 									navigate('/login')
 								}} 
 								text="Log In"
-								// sx={{
-								// 	backgroundColor:"red",
-								// 	'&:hover':{
-								// 		backgroundColor:"transparent",
-								// 		color:"red",
-								// 		border:"1px solid red"
-								// 	}
-								// }}
+								sx={{
+									backgroundColor:"#E12454",
+									'&:hover':{
+										backgroundColor:"transparent",
+										color:"#E12454",
+										border:"1px solid #E12454"
+									}
+								}}
 							/>
 
 					}

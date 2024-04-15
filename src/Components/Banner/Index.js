@@ -22,13 +22,13 @@ export default function Index() {
     <Stack style={{
       backgroundImage: `url(${Banner})`,
       backgroundRepeat: "no-repeat",
-      backgroundSize: "conatin",
-      width: "100vw",
+      backgroundSize: "cover",
+      maxWidth: "100vw",
     }} justifyContent={"center"}>
       <Stack width={"70%"} alignItems={"center"} py={15}>
-        <Stack width={isMobile?"60%":"90%"} maxWidth={"600px"} spacing={2}>
+        <Stack width="90%" maxWidth={"600px"} spacing={2}>
           <Typography variant="body1" color="#6F8BA4" style={{ opacity: "0.7" }}>Total Health Care Solution</Typography>
-          <Typography variant={isMobile?"h4":"h3"} width={"80%"} color="#223A66" fontWeight={"bold"} fontFamily={"sans-serif"}>Your Most Trusted Health Partner</Typography>
+          <Typography variant="h3" width={"80%"} color="#223A66" fontWeight={"bold"} fontFamily={"sans-serif"}>Your Most Trusted Health Partner</Typography>
           <Typography variant="body1" width={"90%"} color="#6F8BA4" lineHeight={"30px"}>A repudiandae ipsam labo ipsa voluptatum quidem quae laudantium quisquam aperiam maiores sunt fugit, deserunt rem suscipit placeat.</Typography>
           <Button
             variant="contained"
