@@ -28,7 +28,6 @@ export default function Index() {
         setValue((prev) => ({ ...prev, [name]: value }))
     }
     const result = data.filter((obj) => obj.userName === value.userName)
-    console.log(result)
     const validateData = () => {
         const err = {}
         let count = 0;
@@ -63,7 +62,7 @@ export default function Index() {
     }
 
     return (
-        <Layout width="900px" height="525px" >
+        <Layout width="900px" height="530px" >
             <Stack spacing={3} padding="40px 55px" alignItems={"center"} width="50%" component="form" onSubmit={clickHandler} >
                 <Typography variant='h4' color="#0056FB" style={{ marginBottom: "20px" }}>Log In</Typography>
                 <Stack direction="row" spacing={2} height={"50px"}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
 import { Link } from 'react-router-dom'
 import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
@@ -14,7 +14,7 @@ import Button from '../Button/Index'
 export default function Index() {
 
 	const navigate = useNavigate();
-	const { isLoggedIn, loginData } = useAuth();
+	const { isLoggedIn, loginData ,activeMenu , handleMenuClick } = useAuth();
 
 	const LoginData = loginData
 
@@ -64,10 +64,6 @@ export default function Index() {
 		},
 	]
 
-	const [activeMenu, setActiveMenu] = useState(null);
-	const handleMenuClick = (menu) => {
-		setActiveMenu(menu);
-	};
 	return (
 		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
 			<Container maxWidth="xl">
@@ -159,14 +155,7 @@ export default function Index() {
 						CARE
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} justifyContent={"center"} mr={10}>
-						{menu.map(({ name, url }) => (
-							<Link
-								to={url}
-								style={{
-									textDecoration: "none"
-
-								}}
-							>
+						{menu?.map(({ name, url }) => (
 								<Typography
 									key={name}
 									fontSize="large"
@@ -176,8 +165,8 @@ export default function Index() {
 									color={activeMenu === name ? '#409bd8' : '#65138f'}
 									onClick={() => {
 										handleMenuClick(name)
-										console.log(url)
-									}
+										navigate(url)
+									}	
 									}
 									sx={{
 										textShadow: activeMenu === name ? "4px 4px 10px rgba(0,0,0,0.5)" : "",
@@ -191,7 +180,6 @@ export default function Index() {
 								>
 									{name}
 								</Typography>
-							</Link>
 						))}
 					</Box>
 					{

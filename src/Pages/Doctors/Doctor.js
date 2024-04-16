@@ -1,8 +1,9 @@
 import React from 'react'
 import Navbar from '../../Components/Navbar/Index'
+import Footer from '../../Components/Footer/Footer'
 import DoctorCard from './DoctorCard'
 import doctorData from '../../Data/DoctorData/DoctorData'
-import { Stack, Container, Grid, Item } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 
 export default function Doctor() {
   const data = doctorData;
@@ -18,6 +19,7 @@ export default function Doctor() {
           ))}
         </Grid>
       </Container>
+      <Footer />
     </>
   )
 }
