@@ -4,6 +4,8 @@ import Home from './Pages/Home/Home'
 import Login from './Pages/Login/Index'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import SetUsername from './Pages/Signin/SetUsername'
+import Doctor from './Pages/Doctors/Doctor'
+import DoctorDetails from './Pages/Doctors/DoctorDetails'
 
 export default function App() {
 
@@ -17,6 +19,14 @@ export default function App() {
                 <Route
                     exact path="/home"
                     element={<Home />}
+                />
+                <Route
+                    exact path="/doctors"
+                    element={<Doctor />}
+                />
+                <Route
+                    exact path="/doctors/:doctorId"
+                    element={<DoctorDetails />}
                 />
                 <Route
                     exact path="/login"

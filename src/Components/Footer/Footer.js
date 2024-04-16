@@ -1,7 +1,7 @@
 import { Stack, Typography, Link, Container } from '@mui/material'
 import React from 'react'
 import logo from '../../Assets/Images/logos/logo.png'
-import { Facebook as FacebookIcon, Instagram as InstagramIcon, X } from '@mui/icons-material';
+import { Business, Email, Facebook as FacebookIcon, Instagram as InstagramIcon, PhoneInTalk, X } from '@mui/icons-material';
 import '@fontsource/lato/300.css';
 
 
@@ -17,13 +17,19 @@ export default function Footer() {
                             <Typography variant='h4' color="#65138F">CARE</Typography>
                         </Stack>
                     </Stack>
-                    <Typography variant="h6" style={{opacity:"0.5"}}>"Medicines can cure diseases, but only doctors can cure patients."</Typography>
+                    <Typography variant="h6" style={{ opacity: "0.5" }}>"Medicines can cure diseases, but only doctors can cure patients."</Typography>
                     <Stack spacing={2}>
                         <Typography variant='h5' fontWeight={"bold"} color="#409BD8">Follow Us</Typography>
                         <Stack direction="row" spacing={5}>
-                            <FacebookIcon fontSize="large" />
-                            <InstagramIcon fontSize="large" />
-                            <X fontSize="large" />
+                            <Link href="https://www.facebook.com" color="inherit" target="_blank">
+                                <FacebookIcon fontSize="large" />
+                            </Link>
+                            <Link href='https://www.instagram.com' color="inherit" target="_blank">
+                                <InstagramIcon fontSize="large" />
+                            </Link>
+                            <Link href='https://twitter.com' color="inherit" target="_blank">
+                                <X fontSize="large" />
+                            </Link>
                         </Stack>
                     </Stack>
                 </Stack>
@@ -49,16 +55,19 @@ export default function Footer() {
                 </Stack>
                 <Stack spacing={4}>
                     <Typography variant='h5' color={"#65138F"} fontWeight={"bold"}>Contact</Typography>
-                    <Stack spacing={2}>
-                        <Link href="tel:9898532307" style={{ textDecoration: "none" }} color={"#409BD8"}>
-                            <Typography>+919898535307</Typography>
-                        </Link>
-                        <Link href="mailto:kushpatel0028@gmail.com" color={"#409BD8"} style={{ textDecoration: "none" }}>
-                            <Typography>healthcare@gmail.com</Typography>
-                        </Link>
-                        <Link href="https://maps.app.goo.gl/d2bCx7ywMjJukukPA" color={"#409BD8"} style={{ textDecoration: "none" }}>
-                            <Typography>DRC System , GIFT city , Gandhinagar</Typography>
-                        </Link>
+                    <Stack spacing={3} >
+                        <Stack spacing={2} component={Link} direction="row" href="tel:9898532307" style={{ textDecoration: "none" }} color={"inherit"}>
+                            <PhoneInTalk/>
+                            <Typography color={"#409BD8"}>+919898535307</Typography>
+                        </Stack>
+                        <Stack spacing={2} component={Link} direction="row" href="mailto:kushpatel0028@gmail.com" color={"inherit"}  style={{ textDecoration: "none" }}>
+                            <Email/>
+                            <Typography color={"#409BD8"}>healthcare@gmail.com</Typography>
+                        </Stack>
+                        <Stack spacing={2} component={Link} direction="row" href="https://maps.app.goo.gl/d2bCx7ywMjJukukPA" color={"inherit"} style={{ textDecoration: "none" }}>
+                            <Business/>
+                            <Typography color={"#409BD8"}>DRC System , GIFT city , Gandhinagar</Typography>
+                        </Stack>
                     </Stack>
                 </Stack>
             </Stack>

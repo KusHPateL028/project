@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Stack, AppBar, Box, Toolbar, Typography, Container, Link } from "@mui/material";
+import { Stack, AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
+import { Link } from 'react-router-dom'
 import { Home as HomeIcon, Menu as MenuIcon, MedicalServices as MedicalServicesIcon, Info as InfoIcon, PersonOutline as PersonOutlineIcon, Logout, GridView } from '@mui/icons-material';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserDoctor, faFlaskVial } from "@fortawesome/free-solid-svg-icons";
@@ -10,14 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import Avatar from '../Avatar/Index'
 import Button from '../Button/Index'
 
-export default function Index(props) {
-	const navigate = useNavigate();
-	const { isLoggedIn } = useAuth();
+export default function Index() {
 
-	const LoginData = props.data
+	const navigate = useNavigate();
+	const { isLoggedIn, loginData } = useAuth();
+
+	const LoginData = loginData
 
 	const userName = (LoginData.userName) || (LoginData.name)
-	let img =  LoginData.picture?.data?.url || LoginData.picture || ''
+	let img = LoginData.picture?.data?.url || LoginData.picture || ''
 	const profile = [
 		{
 			name: "Profile",
@@ -70,7 +72,7 @@ export default function Index(props) {
 		<AppBar position="static" style={{ backgroundColor: "transparent" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<Link href='/' style={{ cursor: "pointer", textDecoration: "none" }}>
+					<Link to='/' style={{ cursor: "pointer", textDecoration: "none" }}>
 						<Stack direction={"row"}>
 							<Stack
 								component={"img"}
@@ -122,7 +124,7 @@ export default function Index(props) {
 						component={"img"}
 						src={logo}
 						width="40px"
-						sx={{ display: { xs: "flex", md: "none" },mr:1}}
+						sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
 					/>
 					<Typography
 						variant="h5"
@@ -160,8 +162,8 @@ export default function Index(props) {
 						{menu.map(({ name, url }) => (
 							<Link
 								to={url}
-								sx={{
-									textDecoration: "none",
+								style={{
+									textDecoration: "none"
 
 								}}
 							>
@@ -172,7 +174,11 @@ export default function Index(props) {
 									mx={2}
 									fontWeight={"bold"}
 									color={activeMenu === name ? '#409bd8' : '#65138f'}
-									onClick={() => handleMenuClick(name)}
+									onClick={() => {
+										handleMenuClick(name)
+										console.log(url)
+									}
+									}
 									sx={{
 										textShadow: activeMenu === name ? "4px 4px 10px rgba(0,0,0,0.5)" : "",
 										opacity: activeMenu === null ? 1 : activeMenu === name ? 1 : 0.5,
@@ -201,21 +207,21 @@ export default function Index(props) {
 								userName={userName}
 								img={img}
 							>
-								{img? <Avatar src={img} /> : <Avatar name={userName} />}
+								{img ? <Avatar src={img} /> : <Avatar name={userName} />}
 							</Drawer>
-							: 
+							:
 							<Button
 								variant="contained"
 								onClick={() => {
 									navigate('/login')
-								}} 
+								}}
 								text="Log In"
 								sx={{
-									backgroundColor:"#E12454",
-									'&:hover':{
-										backgroundColor:"transparent",
-										color:"#E12454",
-										border:"1px solid #E12454"
+									backgroundColor: "#E12454",
+									'&:hover': {
+										backgroundColor: "transparent",
+										color: "#E12454",
+										border: "1px solid #E12454"
 									}
 								}}
 							/>
