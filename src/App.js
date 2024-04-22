@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SetUsername from "./Pages/Signin/SetUsername";
 import Doctor from "./Pages/Doctors/Doctor";
 import DoctorDetails from "./Pages/Doctors/DoctorDetails";
+import Service from './Pages/Service/Index'
+import AboutUs from './Pages/AboutUs/Index'
+import LabTest from './Pages/LabTest/Index'
 import {Link} from '@material-ui/core'
 
 export default function App() {
@@ -31,6 +34,18 @@ export default function App() {
             <Route
                 exact path="/login"
                 element={<Login />}
+            />
+            <Route
+                exact path="/services"
+                element={<Service />}
+            />
+            <Route
+                exact path="/about"
+                element={<AboutUs />}
+            />
+            <Route
+                exact path="/labtest"
+                element={<LabTest />}
             />
             <Route
                 exact path="/signin"
