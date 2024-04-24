@@ -11,7 +11,7 @@ const data = [
         consultation_fee: 150.00,
         working_hours: "Mon-Fri: 9am-5pm",
         image_url: "https://www.shutterstock.com/image-photo/healthcare-medical-staff-concept-portrait-600nw-2281024823.jpg",
-        description: "Dr. John Smith is a highly experienced cardiologist with expertise in heart diseases and cardiac interventions."
+        description: "Dr. John Smith is a highly esteemed cardiologist renowned for his expertise in diagnosing and treating a wide array of cardiovascular conditions. With over 15 years of dedicated practice, Dr. Smith has become a trusted figure in the medical community, known for his exceptional patient care and commitment to advancing the field of cardiology. Graduating with top honors and earning his MD degree, Dr. Smith embarked on a journey of continuous learning and professional growth. Throughout his career, he has contributed significantly to research and innovation in the realm of cardiac interventions, earning accolades for his groundbreaking work in the development of minimally invasive procedures. Dr. Smith's holistic approach to patient care encompasses not only medical treatment but also comprehensive lifestyle management, empowering his patients to lead heart-healthy lives."
     },
     {
         id: 2,
@@ -25,7 +25,7 @@ const data = [
         consultation_fee: 120.00,
         working_hours: "Mon-Wed: 10am-3pm, Fri: 1pm-6pm",
         image_url: "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
-        description: "Dr. Emily Johnson specializes in pediatrics and is dedicated to providing comprehensive care for children of all ages."
+        description: "Dr. Emily Johnson is a dedicated pediatrician with a passion for ensuring the health and well-being of children from infancy through adolescence. Armed with dual qualifications in MBBS and MD, Dr. Johnson brings a wealth of knowledge and expertise to her practice, offering compassionate care to young patients and their families. Over the past decade, she has earned a reputation for her unwavering commitment to pediatric medicine, tirelessly advocating for the unique needs of children in both clinical and academic settings. Dr. Johnson's approach is characterized by warmth and empathy, fostering trusting relationships with her patients and providing them with the support they need to thrive. Affiliated with the esteemed Townsville Children Hospital, Dr. Johnson continues to make a positive impact on the lives of countless children, ensuring that each child receives the highest standard of care tailored to their individual needs."
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ const data = [
         consultation_fee: 180.00,
         working_hours: "Tue-Thu: 8am-4pm, Sat: 9am-12pm",
         image_url: "https://img.freepik.com/free-photo/doctor-standing-with-folder-stethoscope_1291-11.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. Michael Brown is a renowned dermatologist known for his expertise in diagnosing and treating various skin conditions."
+        description: "Dr. Michael Brown stands at the forefront of dermatological excellence, boasting over two decades of experience in the diagnosis and treatment of diverse skin conditions. As a distinguished dermatologist, Dr. Brown is revered for his unwavering dedication to providing personalized care to each of his patients, ensuring that they receive tailored treatment plans designed to optimize skin health and restore confidence. With a meticulous attention to detail and a commitment to staying abreast of the latest advancements in dermatology, Dr. Brown has garnered a reputation for excellence among both patients and peers alike. At the Villageton Skin Clinic, Dr. Brown continues to uphold the highest standards of patient care, utilizing state-of-the-art technologies and cutting-edge techniques to deliver superior outcomes for individuals seeking expert dermatological guidance."
     },
     {
         id: 4,
@@ -53,7 +53,7 @@ const data = [
         consultation_fee: 170.00,
         working_hours: "Mon-Fri: 8am-6pm",
         image_url: "https://img.freepik.com/premium-photo/indian-female-doctor-white-coat-with-stethoscope-smiling_875825-49943.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. Sarah Johnson is an expert in obstetrics and gynecology, providing compassionate care to women of all ages."
+        description: "Dr. Sarah Johnson is an expert in obstetrics and gynecology, providing compassionate care to women of all ages. With dual qualifications in MD and PhD, Dr. Johnson brings a unique blend of clinical expertise and research insight to her practice. With 18 years of experience, she has earned the trust and respect of her patients and colleagues alike. Dr. Johnson is affiliated with Metroville Women's Hospital, where she remains dedicated to empowering women through comprehensive healthcare services."
     },
     {
         id: 5,
@@ -67,7 +67,7 @@ const data = [
         consultation_fee: 200.00,
         working_hours: "Mon-Thu: 9am-5pm, Fri: 9am-12pm",
         image_url: "https://img.freepik.com/free-photo/male-doctor-with-stethoscope-standing-looking-camera_114579-72885.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. David Lee is a highly skilled orthopedic surgeon specializing in the treatment of musculoskeletal injuries and conditions."
+        description: "Dr. David Lee is a highly skilled orthopedic surgeon specializing in the treatment of musculoskeletal injuries and conditions. With over 22 years of experience, Dr. Lee has performed countless successful surgeries and interventions, helping patients regain mobility and improve their quality of life. He is known for his meticulous approach to patient care, taking the time to thoroughly evaluate each case and develop personalized treatment plans. Dr. Lee is affiliated with Hilltown Orthopedic Center, where he continues to uphold the highest standards of orthopedic care."
     },
     {
         id: 6,
@@ -81,7 +81,7 @@ const data = [
         consultation_fee: 160.00,
         working_hours: "Tue-Fri: 10am-6pm, Sat: 9am-1pm",
         image_url: "https://www.shutterstock.com/image-photo/profile-photo-attractive-family-doc-600nw-1724693776.jpg",
-        description: "Dr. Rachel Garcia is an ophthalmologist dedicated to providing the highest quality eye care to her patients."
+        description: "Dr. Rachel Garcia is an ophthalmologist dedicated to providing the highest quality eye care to her patients. With 12 years of experience, Dr. Garcia has expertise in diagnosing and treating a wide range of eye conditions, from refractive errors to complex ocular diseases. She is committed to utilizing advanced technologies and innovative techniques to deliver optimal outcomes for her patients. Dr. Garcia is affiliated with Parkview Eye Clinic, where she continues to pursue excellence in the field of ophthalmology."
     },
     {
         id: 7,
@@ -95,7 +95,7 @@ const data = [
         consultation_fee: 190.00,
         working_hours: "Mon-Wed: 8am-4pm, Thu: 10am-6pm",
         image_url: "https://img.freepik.com/premium-photo/doctor-man-keeping-arms-crossed_1368-40089.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. Mark Wilson is a neurologist specializing in the diagnosis and treatment of neurological disorders."
+        description: "Dr. Mark Wilson is a neurologist specializing in the diagnosis and treatment of neurological disorders. With dual qualifications in MD and PhD, Dr. Wilson brings a comprehensive understanding of the brain and nervous system to his practice. With 16 years of experience, he has helped countless patients manage conditions such as epilepsy, stroke, and multiple sclerosis. Dr. Wilson is affiliated with Lakeside Neurological Institute, where he remains committed to advancing the field of neurology through patient care and research."
     },
     {
         id: 8,
@@ -109,7 +109,7 @@ const data = [
         consultation_fee: 180.00,
         working_hours: "Mon-Fri: 8am-5pm",
         image_url: "https://t3.ftcdn.net/jpg/04/01/33/02/360_F_401330214_0gsrcf5OLkWbF5irM0doBDwafFbWQRVH.jpg",
-        description: "Dr. Jessica Martinez provides comprehensive primary care services with a focus on preventive medicine and health promotion."
+        description: "Dr. Jessica Martinez provides comprehensive primary care services with a focus on preventive medicine and health promotion. With 14 years of experience, Dr. Martinez has developed a deep understanding of the interconnected nature of physical health and overall well-being. She is dedicated to building long-lasting relationships with her patients, empowering them to take an active role in their healthcare journey. Dr. Martinez is affiliated with Sunnyside Medical Center, where she continues to prioritize patient-centered care."
     },
     {
         id: 9,
@@ -123,7 +123,7 @@ const data = [
         consultation_fee: 180.00,
         working_hours: "Mon-Thu: 9am-5pm, Fri: 9am-12pm",
         image_url: "https://img.freepik.com/free-photo/young-man-doctor-wearing-white-coat-stethoscope-looking-confident-with-crossed-arms-1_141793-12597.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. Christopher Adams specializes in the diagnosis and treatment of urinary tract and male reproductive system disorders."
+        description: "Dr. Christopher Adams specializes in the diagnosis and treatment of urinary tract and male reproductive system disorders. With 19 years of experience, Dr. Adams has expertise in managing conditions such as kidney stones, prostate cancer, and erectile dysfunction. He is committed to providing personalized care tailored to each patient's unique needs, utilizing the latest advancements in urological medicine. Dr. Adams is affiliated with Riverside Urology Clinic, where he remains dedicated to improving the lives of his patients."
     },
     {
         id: 10,
@@ -137,7 +137,7 @@ const data = [
         consultation_fee: 170.00,
         working_hours: "Tue-Fri: 10am-6pm, Sat: 9am-1pm",
         image_url: "https://img.freepik.com/free-photo/portrait-doctor_144627-39389.jpg?size=626&ext=jpg&ga=GA1.1.1489364864.1710409430&semt=ais",
-        description: "Dr. Elizabeth Taylor is a psychiatrist committed to providing compassionate and effective mental health care."
+        description: "Dr. Elizabeth Taylor is a psychiatrist committed to providing compassionate and effective mental health care. With 17 years of experience, Dr. Taylor has expertise in diagnosing and treating a wide range of psychiatric disorders, including depression, anxiety, and bipolar disorder. She takes a holistic approach to patient care, addressing not only the symptoms of mental illness but also the underlying factors contributing to each individual's well-being. Dr. Taylor is affiliated with Hillcrest Psychiatric Center, where she continues to advocate for mental health awareness and support."
     }
 ]
 
